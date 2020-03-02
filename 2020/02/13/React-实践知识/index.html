@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>React 实践知识 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="React 时间知识点 最近也是闲来无事，就想去较为深入的学习下React的开发应用，虽说之前也是稍微系统的学些了下，但只是在学习的基础上，并没有实践到真正的应用上，这次也是简单的实践了下。并借于本篇文章总结下一些常用的知识点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 实践知识">
+<meta property="og:url" content="http://yoursite.com/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="React 时间知识点 最近也是闲来无事，就想去较为深入的学习下React的开发应用，虽说之前也是稍微系统的学些了下，但只是在学习的基础上，并没有实践到真正的应用上，这次也是简单的实践了下。并借于本篇文章总结下一些常用的知识点。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-13T04:33:04.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.951Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-React-实践知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time datetime="2020-02-13T04:33:04.000Z" itemprop="datePublished">2020-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React 实践知识
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="React-时间知识点"><a href="#React-时间知识点" class="headerlink" title="React 时间知识点"></a>React 时间知识点</h1><blockquote>
+<p>最近也是闲来无事，就想去较为深入的学习下React的开发应用，虽说之前也是稍微系统的学些了下，但只是在学习的基础上，并没有实践到真正的应用上，这次也是简单的实践了下。并借于本篇文章总结下一些常用的知识点。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><blockquote>
+<p>我这次写的应用是算是一个我LightBlog的React重构吧。功能模块我就不细说了，一般就是前台的展示和后台的管理，中间加个登录。这次我先是写了登录和后台的总的页面布局，用的ui组件是<code>antd</code>。下面就是我的一些常用的知识点。</p>
+</blockquote>
+<h3 id="Route-组件封装——验证是否登录"><a href="#Route-组件封装——验证是否登录" class="headerlink" title="Route 组件封装——验证是否登录"></a>Route 组件封装——验证是否登录</h3><blockquote>
+<p>需求就是在路由的跳转之前就对该路由进行是否登录的验证</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>登录后的cookie处理，一下就是cookie验证和存储所需要用到的函数。</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> LOGIN_COOKIE_NAME = <span class="string">'sessionId'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isAuthenticated</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> _getCookie(LOGIN_COOKIE_NAME)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">authenticateSuccess</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  _setCookie(LOGIN_COOKIE_NAME, ...arguments)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">logout</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  _setCookie(LOGIN_COOKIE_NAME, <span class="string">''</span>, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_getCookie</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> start, end</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    start = <span class="built_in">document</span>.cookie.indexOf(name + <span class="string">'='</span>)</span><br><span class="line">    <span class="keyword">if</span> (start !== <span class="number">-1</span>) &#123;</span><br><span class="line">      start = start + name.length + <span class="number">1</span></span><br><span class="line">      end = <span class="built_in">document</span>.cookie.indexOf(<span class="string">';'</span>, start)</span><br><span class="line">      <span class="keyword">if</span> (end === <span class="number">-1</span>) &#123;</span><br><span class="line">        end = <span class="built_in">document</span>.cookie.length</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(start, end))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_setCookie</span> (<span class="params">name, value, expire</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">  date.setDate(date.getDate() + expire)</span><br><span class="line">  <span class="built_in">document</span>.cookie = name + <span class="string">'='</span> + <span class="built_in">escape</span>(value) + <span class="string">'; path=/'</span> +</span><br><span class="line">    (expire ? <span class="string">';expires='</span> + date.toGMTString() : <span class="string">''</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol start="2">
+<li>登陆完以后就调用 _setCookie 函数，完成保存。但是如果之间输入路由就需要 我所要用到的 路由验证组件</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Route, Redirect &#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; isAuthenticated &#125; <span class="keyword">from</span> <span class="string">'../../utils/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PrivateRoute = <span class="function">(<span class="params">&#123; component: Component, ...rest &#125;</span>) =&gt;</span> (</span><br><span class="line">    &lt;Route &#123;...rest&#125; render=&#123;(props) =&gt; (</span><br><span class="line">        !!isAuthenticated() ? <span class="xml"><span class="tag">&lt;<span class="name">Component</span> &#123;<span class="attr">...props</span>&#125;/&gt;</span></span> : <span class="xml"><span class="tag">&lt;<span class="name">Redirect</span> <span class="attr">to</span>=<span class="string">&#123;&#123;</span></span></span></span><br><span class="line"><span class="xml">            pathname: '/login',</span></span><br><span class="line"><span class="xml">            state: &#123;from: props.location&#125;</span></span><br><span class="line"><span class="xml">        &#125;&#125;/&gt;</span></span><br><span class="line">    )&#125;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default PrivateRoute;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上就是 路由的验证组件——PrivateRoute, 通过验证方法 <code>isAuthenticated()</code> 来判断是否登录，<strong>注意</strong>，这里的 <code>{pathname: &#39;/login&#39;, state:{from: props.location }}</code>就是储存了当前的路由，用户登录后的路由重新跳转。</p>
+<blockquote>
+<p>3.登陆完以后的储存和跳转</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">authenticateSuccess(username, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">const</span> &#123;<span class="keyword">from</span>&#125; = <span class="keyword">this</span>.props.location.state || &#123;<span class="attr">from</span>: &#123;<span class="attr">pathname</span>: <span class="string">'/'</span>&#125;&#125;</span><br><span class="line"><span class="keyword">this</span>.props.history.push(<span class="keyword">from</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件的跳转页面-loading-显示和react-loadable的使用"><a href="#组件的跳转页面-loading-显示和react-loadable的使用" class="headerlink" title="组件的跳转页面 loading 显示和react-loadable的使用"></a>组件的跳转页面 loading 显示和react-loadable的使用</h3><blockquote>
+<p>这里使用 了 <code>nprogress</code> 和 <code>react-loadable</code> , <code>nprogress</code> 是用户页面的中间件跳转，而<code>react-loadable</code>减少 组件依赖文件的第一次加载，加快页面响应</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> Loadable <span class="keyword">from</span> <span class="string">'react-loadable'</span>;</span><br><span class="line"><span class="keyword">import</span> NProgress <span class="keyword">from</span> <span class="string">'nprogress'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'nprogress/nprogress.css'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoadingPage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="comment">//类似github页面加载的那个加载条</span></span><br><span class="line">    componentWillMount()&#123;</span><br><span class="line">      NProgress.start()</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillUnmount()&#123;</span><br><span class="line">      NProgress.done()</span><br><span class="line">    &#125;</span><br><span class="line">    render () &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        &lt;div/&gt;</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> LoadableComponent = <span class="function">(<span class="params">component</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Loadable(&#123;</span><br><span class="line">      loader: component,</span><br><span class="line">      loading: <span class="function"><span class="params">()</span>=&gt;</span><span class="xml"><span class="tag">&lt;<span class="name">LoadingPage</span>/&gt;</span></span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> LoadableComponent</span><br></pre></td></tr></table></figure>
+
+<h3 id="TypingCard-组件的编写"><a href="#TypingCard-组件的编写" class="headerlink" title="TypingCard 组件的编写"></a>TypingCard 组件的编写</h3><blockquote>
+<p>TypingCard 是一个动态打字效果的组件</p>
+</blockquote>
+<ul>
+<li>比如单纯的文字打字效果</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> divTyping = <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>)</span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">	timer = <span class="number">0</span>,</span><br><span class="line">	str = <span class="string">'用JS实现动态打字效果'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">typing</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &lt;= str.length) &#123;</span><br><span class="line">        divTyping.innerHTML = str.slice(<span class="number">0</span>, i++) + <span class="string">'_'</span></span><br><span class="line">        timer = setTimeout(typing, <span class="number">200</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        divTyping.innerHTML = str<span class="comment">//结束打字,移除 _ 光标</span></span><br><span class="line">        clearTimeout(timer)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果只是单纯的打印文字上面的函数就够了，但是想打印带标签的就需要再深入一下了，可以参考这篇<a href="https://www.cnblogs.com/coffeedeveloper/p/3852894.html" target="_blank" rel="noopener">博客</a></p>
+</blockquote>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><ul>
+<li>获取打印的内容</li>
+<li>将内容转化为字符和对象组成的数组中（对象是用来保存dom节点的）</li>
+<li>获取数组的第一个元素并在原数组中删除，然后判断：是字符则打印；是对象，则创建dom节点，并重复第一步</li>
+<li>数组长度为空时，判断对象是否有parent属性，有则回到第一步，没有则打印完毕</li>
+</ul>
+<p>大致源码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Typing</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(opts)&#123;</span><br><span class="line">        <span class="keyword">this</span>.opts = opts || &#123;&#125;;</span><br><span class="line">        <span class="keyword">this</span>.source = opts.source; <span class="comment">// 显示全部内容。可以display:none 隐藏掉</span></span><br><span class="line">        <span class="keyword">this</span>.output = opts.output; <span class="comment">// 显示区域</span></span><br><span class="line">        <span class="keyword">this</span>.delay = opts.delay || <span class="number">120</span>;</span><br><span class="line">        <span class="keyword">this</span>.chain = &#123;</span><br><span class="line">            parent: <span class="literal">null</span>,</span><br><span class="line">            dom: <span class="keyword">this</span>.output,</span><br><span class="line">            val: []</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">if</span>(!(<span class="keyword">typeof</span> <span class="keyword">this</span>.opts.done === <span class="string">'function'</span>)) <span class="keyword">this</span>.opts.done = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    init() &#123;</span><br><span class="line">        <span class="comment">//初始化函数</span></span><br><span class="line">        <span class="keyword">this</span>.chain.val = <span class="keyword">this</span>.convert(<span class="keyword">this</span>.source, <span class="keyword">this</span>.chain.val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    convert(dom, arr)&#123;</span><br><span class="line">        <span class="comment">//将dom节点下的所有子节点转化为数组</span></span><br><span class="line">        <span class="keyword">let</span> children = <span class="built_in">Array</span>.from(dom.childNodes);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; children.length; i++)&#123;</span><br><span class="line">            <span class="keyword">let</span> node = children[i];</span><br><span class="line">            <span class="keyword">if</span>(node.nodeType === <span class="number">3</span>)&#123; <span class="comment">// 代表元素或属性中的文本内容</span></span><br><span class="line">                arr = arr.concat(node.nodeValue.split(<span class="string">''</span>))</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(node.nodeType === <span class="number">1</span>)&#123; <span class="comment">//代表元素</span></span><br><span class="line">                <span class="keyword">let</span> val = [];</span><br><span class="line">                val = <span class="keyword">this</span>.convert(node, val);</span><br><span class="line">                arr.push(&#123;</span><br><span class="line">                    <span class="string">'dom'</span>: node,</span><br><span class="line">                    <span class="string">'val'</span>: val</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    print(dom, val, callback) &#123;</span><br><span class="line">        <span class="comment">// 在 dom 后面添加元素</span></span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            dom.appendChild(<span class="built_in">document</span>.createTextNode(val));</span><br><span class="line">            callback();</span><br><span class="line">        &#125;, <span class="keyword">this</span>.delay)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    play(ele)&#123;</span><br><span class="line">        <span class="comment">// 当打印最后一个字符，动画完毕，执行done</span></span><br><span class="line">        <span class="keyword">if</span>(!ele.val.length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(ele.parent) <span class="keyword">this</span>.play(ele.parent);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">this</span>.opts.done();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> current = ele.val.shift(); <span class="comment">//去第一个元素，同时删除数组的第一个元素</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> current === <span class="string">'string'</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.print(ele.dom, current, ()=&gt;&#123;</span><br><span class="line">                <span class="keyword">this</span>.play(ele); <span class="comment">// 继续打印下一个字符</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> dom = current.dom.cloneNode(); <span class="comment">//克隆节点，不可隆子节点，所有不用参数true</span></span><br><span class="line">            ele.dom.appendChild(dom);</span><br><span class="line">            <span class="keyword">this</span>.play(&#123;</span><br><span class="line">                parent: ele,</span><br><span class="line">                dom,</span><br><span class="line">                val: current.val</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    start() &#123;</span><br><span class="line">        <span class="keyword">this</span>.init();</span><br><span class="line">        <span class="keyword">this</span>.play(<span class="keyword">this</span>.chain);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Typing;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上只是将Tpying的核心代码封装成了一个类对象，传入的参数有，需要逐字显示的div内容<code>source</code>和打印在元素<code>output</code>下，其中的可选参数也有许多，如<code>delay</code>，<code>done</code>等。在正常的使用如下流程</p>
+</blockquote>
+<ul>
+<li><ol>
+<li>获取要打印的内容(this.source)，并将source内容转化为数组，文本节点就转化为字符串数组，将dom节点转化为对象，最后合并成一个数组</li>
+<li>然后依次打印数组内的字符，若是遇到dom的转化对象，则需要先创建节点在打印节点内容，因为克隆的是对象，所以节点的样式都会存在。</li>
+<li>源码如上，使用用法如下(封装了一个 TypingCard)</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Card &#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> Typing <span class="keyword">from</span> <span class="string">'../../utils/typing'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TypingCard</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">        title: <span class="string">'何时使用'</span>,</span><br><span class="line">        source: <span class="string">'暂无内容'</span>,</span><br><span class="line">        height: <span class="number">136</span>,</span><br><span class="line">        delay: <span class="number">50</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.source)</span><br><span class="line">        <span class="keyword">const</span> typing = <span class="keyword">new</span> Typing(&#123;</span><br><span class="line">            source: <span class="keyword">this</span>.source,</span><br><span class="line">            output: <span class="keyword">this</span>.output,</span><br><span class="line">            delay: <span class="keyword">this</span>.props.delay</span><br><span class="line">        &#125;)</span><br><span class="line">        typing.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Card hoverable bordered=&#123;<span class="literal">false</span>&#125; title=&#123;<span class="keyword">this</span>.props.title&#125; style=&#123;&#123;<span class="attr">minHeight</span>:<span class="keyword">this</span>.props.height&#125;&#125; id=&#123;<span class="keyword">this</span>.props.id&#125;&gt;</span><br><span class="line">                &lt;div style=&#123;&#123;<span class="attr">display</span>: <span class="string">'none'</span>&#125;&#125; ref=&#123;ref=&gt;<span class="keyword">this</span>.source=ref&#125; dangerouslySetInnerHTML=&#123;&#123;<span class="attr">__html</span>:<span class="keyword">this</span>.props.source&#125;&#125;&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">                &lt;div ref=&#123;ref=&gt;this.output=ref&#125;&gt;&lt;/</span>div&gt;</span><br><span class="line">            &lt;<span class="regexp">/Card&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default TypingCard;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/" data-id="ck7ai0432006j7u079khl30uc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue 生命周期(详细篇)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSS 基本知识</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

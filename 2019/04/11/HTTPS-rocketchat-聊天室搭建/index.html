@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>HTTPS rocketchat 聊天室搭建 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开源免费的rocketchat搭建 rocketchat 是一款开源免费的网站式聊天室，你可以搭建在你的VPS上。今天也是简单写一下做个记录。其中我会介绍如何配置SSL证书。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTPS rocketchat 聊天室搭建">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/HTTPS-rocketchat-%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="开源免费的rocketchat搭建 rocketchat 是一款开源免费的网站式聊天室，你可以搭建在你的VPS上。今天也是简单写一下做个记录。其中我会介绍如何配置SSL证书。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qnpic.top/rocketchat%5C1.jpg">
+<meta property="og:image" content="http://qnpic.top/rocketchat%5C2.jpg">
+<meta property="og:image" content="http://qnpic.top/rocketchat%5C3.jpg">
+<meta property="article:published_time" content="2019-04-11T06:12:51.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.947Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qnpic.top/rocketchat%5C1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HTTPS-rocketchat-聊天室搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/11/HTTPS-rocketchat-%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time datetime="2019-04-11T06:12:51.000Z" itemprop="datePublished">2019-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTPS rocketchat 聊天室搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="开源免费的rocketchat搭建"><a href="#开源免费的rocketchat搭建" class="headerlink" title="开源免费的rocketchat搭建"></a>开源免费的rocketchat搭建</h1><blockquote>
+<p>rocketchat 是一款开源免费的网站式聊天室，你可以搭建在你的VPS上。今天也是简单写一下做个记录。其中我会介绍如何配置SSL证书。</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>在搭建之前当然你需要一台VPS，这里的话，我就不多阐述了，我搭建的是vultr上的<code>ubuntu 18.10LTS</code> 版本。使用nginx反向代理和免费的SSL证书的配置。</p>
+</blockquote>
+<blockquote>
+<p>当然你最好也是需要一个域名，因为SSL的证书配置需要一个域名，你可以去freenom上注册一个免费的域名。</p>
+</blockquote>
+<h1 id="安装Rocketchat"><a href="#安装Rocketchat" class="headerlink" title="安装Rocketchat"></a>安装Rocketchat</h1><blockquote>
+<p>开始前我们需要对刚购买的VPS进行更新系统</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>然后就是进行安装rocketchat，安装<code>Rocketchat</code>最快的方法就是使用<code>snap</code>。<code>snap</code>是<code>Linux</code>系统上的一种包管理工具。在<code>Ubuntu 16.0LTS</code>以上版本系统都内置了<code>snap</code></p>
+</blockquote>
+<blockquote>
+<p><code>snap</code>安装<code>Rocketchat</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snap install rocketchat-server</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装后,Rocketchat会自动启动，你也是可以检查下是否启动成功</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service snap.rocketchat-server.rocketchat-server status</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/rocketchat%5C1.jpg" alt="img"></p>
+<h1 id="安装nginx并配置"><a href="#安装nginx并配置" class="headerlink" title="安装nginx并配置"></a>安装nginx并配置</h1><blockquote>
+<p>安装nginx的方法我之前也是在Centos7上介绍过，这里的话是使用一下命令行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y nginx</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>启动nginx</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start nginx</span><br><span class="line"># 设置开机自启</span><br><span class="line">sudo systemctl enable nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置反向代理"><a href="#设置反向代理" class="headerlink" title="设置反向代理"></a>设置反向代理</h2><blockquote>
+<p>默认的欢迎页面的文件位置 <code>/etc/nginx/sites-enabled/defalut</code>,但是其中真正的文件位置在 <code>/etc/nginx/sites-available/</code>,只不过设置了软连接</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ls -l &#x2F;etc&#x2F;nginx&#x2F;sites-enabled</span><br><span class="line">total 0</span><br><span class="line">lrwxrwxrwx 1 root root 34 Aug 16 18:20 default -&gt; &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>删除欢迎页面</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建反向代理"><a href="#创建反向代理" class="headerlink" title="创建反向代理"></a>创建反向代理</h2><blockquote>
+<p>这里的话，需要创建配置文件，所以需要<code>vim</code>,如果没有安装的话，可以使用以下命令行安装<code>vim</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y vim</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>然后创建配置文件<code>rocketchat.conf</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;rocketchat.conf</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>基本内容如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">	listen 80;</span><br><span class="line"></span><br><span class="line">	server_name example.com: #这里的example.com填写的是你的域名</span><br><span class="line">   </span><br><span class="line">   location &#x2F; &#123;</span><br><span class="line">   		proxy_pass http:&#x2F;&#x2F;localhost:3000&#x2F;; #指向rocketchat运行的300端口，从而完成反向代理</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意：</strong>上面的<code>example.com</code>是你的域名并且要配置你的域名设置一个A记录指向你的VPS的ip</p>
+</blockquote>
+<blockquote>
+<p>然后通过下述方法创建新的软连接来启用新的配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;rocketchat.conf &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>测试配置是否有误</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -t</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/rocketchat%5C2.jpg" alt="img"></p>
+<blockquote>
+<p>重新加载nginx配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ngins -s reload</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置SSL证书"><a href="#配置SSL证书" class="headerlink" title="配置SSL证书"></a>配置SSL证书</h1><blockquote>
+<p>申请SSL证书的方法有很多，这里的话使用免费的<a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a>的证书。有人写了名为<code>Cerbot</code>的工具，轻松配置证书</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y software-properties-common</span><br><span class="line">sudo add-apt-repository ppa:certbot&#x2F;certbot</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y python-certbot-nginx</span><br><span class="line">sudo certbot --nginx</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Certbot 会询问有关该网站的信息。在执行 <code>sudo apt-get install -y python-certbot-nginx</code> 的时候会询问位置信息，我们选择 亚洲（也就是 <code>6. Asia</code>），时区选择 <code>69. Shanghai</code> 即可。(该方法也是我网上偶然得到，所以有点出入，我运行的时候没有该情况)</p>
+</blockquote>
+<blockquote>
+<p>在执行 <code>sudo certbot --nginx</code> 的时候会询问你的邮箱，填写和你注册域名时相同的邮箱，其他询问同意即可。</p>
+</blockquote>
+<blockquote>
+<p>PS:运行上述代码的时候哦，遇到的情况当然也是远不如此，当时emmm，问题蛮简单的。唯一需要注意的是<code>nginx反向代理</code>填写的域名要记得解析一条A记录指向你的VPS，否则会挑错</p>
+</blockquote>
+<h2 id="开启证书自动续约"><a href="#开启证书自动续约" class="headerlink" title="开启证书自动续约"></a>开启证书自动续约</h2><blockquote>
+<p>我们的证书有效期是3个月，不过cerbot很聪明有一个自动续约的功能，执行下述代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot renew --dry-run</span><br></pre></td></tr></table></figure>
+
+<h1 id="开始使用Rocketchat"><a href="#开始使用Rocketchat" class="headerlink" title="开始使用Rocketchat"></a>开始使用Rocketchat</h1><blockquote>
+<p>配置到这里，该聊天室也会成功配置在你的VPS上。第一次登陆也是需要设置管理员信息。下面也是我成功搭建成功的截图</p>
+</blockquote>
+<p><img src="http://qnpic.top/rocketchat%5C3.jpg" alt="img"></p>
+<p><br><br><br>So<br><br>Just have fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/11/HTTPS-rocketchat-%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%90%AD%E5%BB%BA/" data-id="ck7ai041d003j7u078nyca62k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/14/Python-redis/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Python-redis
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/10/Windscribe-%E6%AF%8F%E6%9C%8830GB%E5%85%8D%E8%B4%B9%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Windscribe 免费科学上网</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

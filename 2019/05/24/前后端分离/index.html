@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>前后端分离 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前后端分离 在前几年的web服务搭建基本都是前后端一起的，就是前端的界面也是后端渲染出来的，这样的话前后端耦合度高，可能只适合于小项目，不容易管理。所以后来的大项目都是使用的前后端分离，这样的话前后端耦合度低，易于管理，提高了拓展性和性能。当然前后端的好处不可能只有这么一点，这里就不多加阐述了。本篇博客也会不断更新，用于解决一些前后端分离的一些不懂的地方。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端分离">
+<meta property="og:url" content="http://yoursite.com/2019/05/24/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前后端分离 在前几年的web服务搭建基本都是前后端一起的，就是前端的界面也是后端渲染出来的，这样的话前后端耦合度高，可能只适合于小项目，不容易管理。所以后来的大项目都是使用的前后端分离，这样的话前后端耦合度低，易于管理，提高了拓展性和性能。当然前后端的好处不可能只有这么一点，这里就不多加阐述了。本篇博客也会不断更新，用于解决一些前后端分离的一些不懂的地方。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qnpic.top/2019-05-23%5C1.png">
+<meta property="og:image" content="http://qnpic.top/2019-05-23%5C2.png">
+<meta property="og:image" content="http://qnpic.top/2019-05-23%5CGIF.gif">
+<meta property="og:image" content="http://qnpic.top/2019-05-23%5CGIF2.gif">
+<meta property="og:image" content="http://qnpic.top/2019-05-23%5C3.jpg">
+<meta property="og:image" content="http://qnpic.top/2019-05-23%5C4.jpg">
+<meta property="og:image" content="http://qnpic.top/2019-05-23%5CGIF3.gif">
+<meta property="og:image" content="http://qnpic.top/2019-05-26%5CGIF.gif">
+<meta property="article:published_time" content="2019-05-23T16:04:00.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.963Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="前后端分离">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qnpic.top/2019-05-23%5C1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-前后端分离" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/24/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" class="article-date">
+  <time datetime="2019-05-23T16:04:00.000Z" itemprop="datePublished">2019-05-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前后端分离
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前后端分离"><a href="#前后端分离" class="headerlink" title="前后端分离"></a>前后端分离</h1><blockquote>
+<p>在前几年的web服务搭建基本都是前后端一起的，就是前端的界面也是后端渲染出来的，这样的话前后端耦合度高，可能只适合于小项目，不容易管理。所以后来的大项目都是使用的前后端分离，这样的话前后端耦合度低，易于管理，提高了拓展性和性能。当然前后端的好处不可能只有这么一点，这里就不多加阐述了。本篇博客也会不断更新，用于解决一些前后端分离的一些不懂的地方。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="简单跨域问题"><a href="#简单跨域问题" class="headerlink" title="简单跨域问题"></a>简单跨域问题</h2><blockquote>
+<p>其实就是因为浏览器的同源政策才导致了跨域问题，如果你想深入了解的话，可以看看这片博客——<a href="https://segmentfault.com/a/1190000015597029?utm_source=tag-newest" target="_blank" rel="noopener">跨域问题</a>. 讲解的蛮好的。</p>
+</blockquote>
+<h3 id="跨域解决方法——代理"><a href="#跨域解决方法——代理" class="headerlink" title="跨域解决方法——代理"></a>跨域解决方法——代理</h3><blockquote>
+<p>我这里就简单在说一下：归根到底就是浏览器的问题，如果只是两个应用服务之间传输数据是不会产生跨域问题，你可能一下子想不通，什么是两个应用服务之间传输数据。比如浏览器的跨域是因为通过浏览器当前域下向当前不同域放出请求，所以，是不是可以开一个代理，该代理就是向当前不同域放出请求。你可能一下子转不过来，下来我就用一个小例子讲解一下</p>
+</blockquote>
+<blockquote>
+<p>比如一下我写了一个简单的ajax请求</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped lang&#x3D;&quot;less&quot;&gt;</span><br><span class="line">&#x2F;&#x2F;...</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;index&quot;&gt;</span><br><span class="line">&#x2F;&#x2F;...</span><br><span class="line">        &lt;Button @click&#x3D;&quot;handleAjax&quot;&gt;发出ajax请求&lt;&#x2F;Button&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import axios from &#39;axios&#39;;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                blogs: [],</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            &#x2F;&#x2F;...</span><br><span class="line">            handleAjax () &#123;</span><br><span class="line">                axios.get(&#39;http:&#x2F;&#x2F;blog.qnpic.top&#x2F;article&#x2F;article_page&#x2F;?page&#x3D;2&#39;).then(res&#x3D;&gt;&#123;</span><br><span class="line">                    console.log(res.data)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        mounted () &#123;</span><br><span class="line">            &#x2F;&#x2F;...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/2019-05-23%5C1.png" alt="img"></p>
+<blockquote>
+<p>以上就是请求的网址，是我的那个博客系统首页的博客api，放回就是分页的博客数据，如果直接点击请求就会触发跨域问题</p>
+</blockquote>
+<p><img src="http://qnpic.top/2019-05-23%5C2.png" alt="img"></p>
+<blockquote>
+<p>所以就是接下来要讲解的东西了。简单来说就是在本地开启一个代理，你可以用node写一个http服务就是替你向当前不同域放出请求，如下就是我写的一个代理</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">const http &#x3D; require(&#39;http&#39;);</span><br><span class="line">const request &#x3D; require(&#39;request&#39;);</span><br><span class="line"></span><br><span class="line">const host &#x3D; &#39;127.0.0.1&#39;;</span><br><span class="line">const port &#x3D; 8010;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;创建一个api代理服务</span><br><span class="line">const apiServer &#x3D; http.createServer((req, res)&#x3D;&gt;&#123;</span><br><span class="line">    const url &#x3D; &#39;http:&#x2F;&#x2F;blog.qnpic.top&#39;+req.url;</span><br><span class="line">    const options &#x3D; &#123;</span><br><span class="line">        url: url</span><br><span class="line">    &#125;;</span><br><span class="line">    function callback(error, response, body)&#123;</span><br><span class="line">        if(!error &amp;&amp; response.statusCode &#x3D;&#x3D;&#x3D; 200)&#123;</span><br><span class="line">            &#x2F;&#x2F; 设置编码类型，否则中文显示乱码</span><br><span class="line">            res.setHeader(&#39;Content-Type&#39;, &#39;text&#x2F;plain;charset&#x3D;UTF-8&#39;);</span><br><span class="line">            &#x2F;&#x2F;设置所有域都可以访问</span><br><span class="line">            res.setHeader(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;);</span><br><span class="line">            &#x2F;&#x2F;返回代理后的内容</span><br><span class="line">            res.end(body);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    request.get(options, callback);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">apiServer.listen(port, host, ()&#x3D;&gt;&#123;</span><br><span class="line">    console.log(&#96;接口代理在http:&#x2F;&#x2F;$&#123;host&#125;:$&#123;port&#125;&#x2F;&#96;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>该http服务运行在8010端口上，不同端口并不会触发跨域问题，修改请求网址</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">handleAjax () &#123;</span><br><span class="line">    axios.get(&#39;http:&#x2F;&#x2F;127.0.0.1:8010&#x2F;article&#x2F;article_page&#x2F;?page&#x3D;2&#39;).then(res&#x3D;&gt;&#123;</span><br><span class="line">        console.log(res.data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果如下</li>
+</ul>
+<p><img src="http://qnpic.top/2019-05-23%5CGIF.gif" alt="img"></p>
+<blockquote>
+<p>这样就通过代理解决了跨域问题，但是每次都这样写得加上端口，不好看，你就可以配置<code>axios</code>。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import axios from &#39;axios&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;基本配置</span><br><span class="line">const proxy &#x3D; &#123;</span><br><span class="line">    apiPath: &#39;http:&#x2F;&#x2F;127.0.0.1:8010&#x2F;&#39;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;Ajax通用配置</span><br><span class="line">proxy.ajax &#x3D; axios.create(&#123;</span><br><span class="line">    baseURL: proxy.apiPath</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;添加响应拦截器</span><br><span class="line">proxy.ajax.interceptors.response.use(res&#x3D;&gt;&#123;</span><br><span class="line">    return res.data</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">export default proxy;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上就简单配置了axios，在这里面写入请求地址的前缀，业务代码就只需要写相对路径，全部代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped lang&#x3D;&quot;less&quot;&gt;</span><br><span class="line">&#x2F;&#x2F;...</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;index&quot;&gt;</span><br><span class="line">        &lt;div v-for&#x3D;&quot;(item,index) in blogs&quot; style&#x3D;&quot;display:block&quot; @click&#x3D;&quot;handleTest(index)&quot; :key&#x3D;&quot;index&quot;&gt;&#123;&#123;item.title&#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;Button @click&#x3D;&quot;handleAjax&quot;&gt;发出ajax请求&lt;&#x2F;Button&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import $ from &#39;..&#x2F;libs&#x2F;axiosProxy&#39;;</span><br><span class="line">    export default &#123;</span><br><span class="line">        components: &#123; vCard &#125;,</span><br><span class="line">        data () &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                blogs: [],</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            handleTest (id) &#123;</span><br><span class="line">                var _this &#x3D; this;</span><br><span class="line">                var blog &#x3D; _this.blogs[id];</span><br><span class="line">                this.$Modal.info(&#123;</span><br><span class="line">                    title: blog.title,</span><br><span class="line">                    content: blog.body</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            getBlogs (page) &#123;</span><br><span class="line">                $.ajax.get(&#39;&#x2F;article&#x2F;article_page&#x2F;?page&#x3D;&#39;+page).then(res&#x3D;&gt;&#123;</span><br><span class="line">                    this.blogs &#x3D; res.data;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        mounted () &#123;</span><br><span class="line">            this.getBlogs(1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>axiosProxy 就是封装的axios配置文件，业务代码就只需要写相对路径就好了，实现效果如下</li>
+</ul>
+<p><img src="http://qnpic.top/2019-05-23%5CGIF2.gif" alt="img"></p>
+<blockquote>
+<p>以上就是通过代理解决一些简单跨域问题的解决办法。</p>
+</blockquote>
+<h2 id="前后端开发之登录注册问题"><a href="#前后端开发之登录注册问题" class="headerlink" title="前后端开发之登录注册问题"></a>前后端开发之登录注册问题</h2><blockquote>
+<p>前后端分离以后，由于两个应用的耦合度下降，一些后端开发的框架的前端渲染功能也就弃用了，因此也弃用了一些附带的功能，如，我<a href="http://blog.qnpic.top" target="_blank" rel="noopener">LightBlog</a>写的django博客丢失了login登录后的sessionid自带传输给浏览器(当然也是要配置的，蛮简单的)，前后端分离后就得自己写。</p>
+</blockquote>
+<blockquote>
+<p>如自己后端产生session存储在redis内存中或者mysql数据库中，然后向前端发送sessionid，前端接受到这个sessionid并存储起来放在cookie里。然后前端配合发送请求自带cookie，后端收到请求分析request请求里的cookie里的sessionid和后端的数据库中进行比较判断是否是登录用户，然后相应返回数据和请求。以上就是前后端的弊端。当然session也是可以用token代替，所以这次我就简单介绍下token的方法。</p>
+</blockquote>
+<h3 id="跨域配置"><a href="#跨域配置" class="headerlink" title="跨域配置"></a>跨域配置</h3><blockquote>
+<p>这里的跨域配置就不是简单如上面的第一种方法那样了。</p>
+</blockquote>
+<h4 id="django-跨域CORS的设置"><a href="#django-跨域CORS的设置" class="headerlink" title="django 跨域CORS的设置"></a>django 跨域CORS的设置</h4><ul>
+<li>1.安装 <code>django-cors-headers</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django-cors-headers</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2.添加应用，在settings里面配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS &#x3D; [</span><br><span class="line">    ...</span><br><span class="line">    &#39;corsheaders&#39;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3.中间件配置，在settings里面配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MIDDLEWARE &#x3D; [</span><br><span class="line">    ...</span><br><span class="line">    &#39;corsheaders.middleware.CorsMiddleware&#39;, #注意位置</span><br><span class="line">    &#39;django.middleware.common.CommonMiddleware&#39;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>4.添加白名单,如我的前端服务部署在8080端口</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CORS_ORIGIN_WHITELIST &#x3D; (</span><br><span class="line">    &#39;http:&#x2F;&#x2F;127.0.0.1:8080&#39;,</span><br><span class="line">    &#39;http:&#x2F;&#x2F;localhost:8080&#39;,</span><br><span class="line">)</span><br><span class="line">CORS_ALLOW_CREDENTIALS &#x3D; True</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面要注意下，网上的有些教程是<code>CORS_ORIGIN_ALLOW_ALL = True</code>，我刚开始也是确实这样的，刚开始我也是没有用到请求携带cookie所以并没有出现错误，后面的前端设置携带cookie就出现错误，如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access to XMLHttpRequest at &#39;http:&#x2F;&#x2F;127.0.0.1:8000&#x2F;backend&#x2F;login&#39; from origin &#39;http:&#x2F;&#x2F;127.0.0.1:8080&#39; has been blocked by CORS policy: The value of the &#39;Access-Control-Allow-Origin&#39; header in the response must not be the wildcard &#39;*&#39; when the request&#39;s credentials mode is &#39;include&#39;. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute.</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上网查询说是，<code>如果后端设置 Access-Control-Allow-Origin: &#39;*&#39;, 会有如下报错信息</code>,所以我也是抱着试一试的态度修改了一下就成功了，原理不太懂，sry~</p>
+</blockquote>
+<ul>
+<li>5.settings配置 <code>APPEND_SLASH = False</code></li>
+</ul>
+<blockquote>
+<p>至此Django的后端跨为问题也是基本解决了，前端就可以携带cookie想我后端发送请求了。^-^</p>
+</blockquote>
+<h3 id="Vue-前端配置"><a href="#Vue-前端配置" class="headerlink" title="Vue 前端配置"></a>Vue 前端配置</h3><blockquote>
+<p>前端配置请求携带cookie也是很简单<code>axios.defaults.withCredentials = true;</code>这行就能全局配置axios请求携带cookie，至于axios的用法就不介绍了</p>
+</blockquote>
+<h3 id="token-配置"><a href="#token-配置" class="headerlink" title="token 配置"></a>token 配置</h3><blockquote>
+<p>以上也是只是解决了跨域问题和请求携带cookie的问题，重头戏<code>token</code>都没介绍了，所以我现在就来介绍一下。token其实也就是一个加密函数，用于验证。</p>
+</blockquote>
+<h4 id="1-在application目录下创建token函数的py文件"><a href="#1-在application目录下创建token函数的py文件" class="headerlink" title="1.在application目录下创建token函数的py文件"></a>1.在application目录下创建token函数的py文件</h4><p><img src="http://qnpic.top/2019-05-23%5C3.jpg" alt="img"></p>
+<h4 id="2-加密token函数"><a href="#2-加密token函数" class="headerlink" title="2.加密token函数"></a>2.加密token函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">import base64</span><br><span class="line">import hmac</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def get_token(key, expire&#x3D;3600):</span><br><span class="line">    &#39;&#39;&#39;</span><br><span class="line">    :param key: str (用户给定的key，需要用户保存以便之后验证token,每次产生token时的key 都可以是同一个key)</span><br><span class="line">    :param expire: int(最大有效时间，单位为s)</span><br><span class="line">    :return: token</span><br><span class="line">    &#39;&#39;&#39;</span><br><span class="line">    ts_str &#x3D; str(time.time() + expire)</span><br><span class="line">    ts_byte &#x3D; ts_str.encode(&quot;utf-8&quot;)</span><br><span class="line">    sha1_tshexstr  &#x3D; hmac.new(key.encode(&quot;utf-8&quot;),ts_byte,&#39;sha1&#39;).hexdigest()</span><br><span class="line">    token &#x3D; ts_str+&#39;:&#39;+sha1_tshexstr</span><br><span class="line">    b64_token &#x3D; base64.urlsafe_b64encode(token.encode(&quot;utf-8&quot;))</span><br><span class="line">    return b64_token.decode(&quot;utf-8&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上也是加密算法，分别是bs64加密和hmac加密，hmac也是哈希加密的一种，不可逆的</p>
+</blockquote>
+<h4 id="3-解密token函数"><a href="#3-解密token函数" class="headerlink" title="3.解密token函数"></a>3.解密token函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">def out_token(key, token):</span><br><span class="line">    &#39;&#39;&#39;</span><br><span class="line">    :param key: 服务器给的固定key</span><br><span class="line">    :param token: 前端传过来的token</span><br><span class="line">    :return: true,false</span><br><span class="line">    &#39;&#39;&#39;</span><br><span class="line"></span><br><span class="line">    # token是前端传过来的token字符串</span><br><span class="line">    try:</span><br><span class="line">        token_str &#x3D; base64.urlsafe_b64decode(token).decode(&#39;utf-8&#39;)</span><br><span class="line">        token_list &#x3D; token_str.split(&#39;:&#39;)</span><br><span class="line">        if len(token_list) !&#x3D; 2:</span><br><span class="line">            return False</span><br><span class="line">        ts_str &#x3D; token_list[0]</span><br><span class="line">        if float(ts_str) &lt; time.time():</span><br><span class="line">            # token expired</span><br><span class="line">            return False</span><br><span class="line">        known_sha1_tsstr &#x3D; token_list[1]</span><br><span class="line">        sha1 &#x3D; hmac.new(key.encode(&quot;utf-8&quot;),ts_str.encode(&#39;utf-8&#39;),&#39;sha1&#39;)</span><br><span class="line">        calc_sha1_tsstr &#x3D; sha1.hexdigest()</span><br><span class="line">        if calc_sha1_tsstr !&#x3D; known_sha1_tsstr:</span><br><span class="line">            # token certification failed</span><br><span class="line">            return False</span><br><span class="line">        # token certification success</span><br><span class="line">        return True</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(e)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上就是token的加解密算法，token里存放的是过期时间和登录用户，后端验证，所以可以存放在mysql里。所以要编写models</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django.db import models</span><br><span class="line">from django.contrib.auth.models import User</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Create your models here.</span><br><span class="line">class UserToken(models.Model):</span><br><span class="line">    user &#x3D; models.OneToOneField(User, related_name&#x3D;&#39;userToken&#39;, on_delete&#x3D;models.CASCADE, unique&#x3D;True)</span><br><span class="line">    token &#x3D; models.CharField(max_length&#x3D;200, blank&#x3D;True)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>记得<code>python manage.py makemigrations</code>和<code>python manage.py migrate</code>生成数据库表</p>
+</blockquote>
+<blockquote>
+<p>到这里token的加解密就完成了，接下来就是怎么用了，token的储存数据库应该在登录视图中进行，所以登录视图函数如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">from django.shortcuts import render,redirect</span><br><span class="line">from django.http import HttpResponse</span><br><span class="line">import json</span><br><span class="line">from django.views.decorators.csrf import csrf_exempt</span><br><span class="line">from django.contrib.auth.models import User</span><br><span class="line">from django.contrib.auth import login,authenticate</span><br><span class="line">from django.contrib.auth.decorators import login_required</span><br><span class="line">from .token_module import out_token, get_token</span><br><span class="line">from .models import UserToken</span><br><span class="line"></span><br><span class="line">@csrf_exempt</span><br><span class="line">def loginView(request):</span><br><span class="line">    if request.method &#x3D;&#x3D; &#39;POST&#39;:</span><br><span class="line">        print(request.COOKIES)</span><br><span class="line">        username &#x3D; request.POST.get(&#39;username&#39;,&#39;error&#39;)</span><br><span class="line">        password &#x3D; request.POST.get(&#39;password&#39;,&#39;error&#39;)</span><br><span class="line">        print(username,password)</span><br><span class="line">        tips &#x3D; &#39;&#39;</span><br><span class="line">        if User.objects.filter(username&#x3D;username):</span><br><span class="line">            # authenticate 判断密码是否正确</span><br><span class="line">            user &#x3D; authenticate(username&#x3D;username, password&#x3D;password)</span><br><span class="line">            if user:</span><br><span class="line">                if user.is_active:</span><br><span class="line">                    token &#x3D; get_token(username, 5) ##这里的5就是过期时间，这里为了演示就设置小一点，5秒</span><br><span class="line">                    UserToken.objects.update_or_create(user&#x3D;user, defaults&#x3D;&#123;&quot;token&quot;: token&#125;)</span><br><span class="line">                    tips &#x3D; &#39;登陆成功&#39;</span><br><span class="line">                    res &#x3D; HttpResponse(json.dumps(&#123;&#39;tips&#39;:tips, &#39;token&#39;: token&#125;))</span><br><span class="line">                    return res</span><br><span class="line">            else:</span><br><span class="line">                tips &#x3D; &#39; 密码错误，请重新输入 &#39;</span><br><span class="line">        else:</span><br><span class="line">            tips &#x3D; &#39; 用户不存在，请注册 &#39;</span><br><span class="line">        res &#x3D; HttpResponse(json.dumps(&#123;&#39;tips&#39;: tips&#125;))</span><br><span class="line">        return res</span><br><span class="line">    else:</span><br><span class="line">        return HttpResponse(&#39;nothing&#39;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>产生的数据库表如下</p>
+</blockquote>
+<p><img src="http://qnpic.top/2019-05-23%5C4.jpg" alt="img"></p>
+<blockquote>
+<p>以上就是登录视图函数，前端vue的代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var _this &#x3D; this;</span><br><span class="line">var username &#x3D; _this.username;</span><br><span class="line">var password &#x3D; _this.password;</span><br><span class="line">if (!(username &amp;&amp; password)) &#123;</span><br><span class="line">    this.$Modal.error(&#123;</span><br><span class="line">    title: &quot;错误&quot;,</span><br><span class="line">    content: &quot;用户名和密码不能为空&quot;</span><br><span class="line">&#125;);</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line">var data &#x3D; &#123;</span><br><span class="line">username: _this.username,</span><br><span class="line">password: _this.password</span><br><span class="line">&#125;;</span><br><span class="line">const _data &#x3D; new FormData();</span><br><span class="line">_data.append(&quot;username&quot;, _this.username);</span><br><span class="line">_data.append(&quot;password&quot;, _this.password);</span><br><span class="line">axios(&#123;</span><br><span class="line">    method: &quot;post&quot;,</span><br><span class="line">    url: &quot;http:&#x2F;&#x2F;127.0.0.1:8000&#x2F;backend&#x2F;login&quot;,</span><br><span class="line">    data: _data,</span><br><span class="line">    &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">    console.log(res.data);</span><br><span class="line">    _this.msg &#x3D; res.data;</span><br><span class="line">    const &#123; token &#125; &#x3D; res.data;</span><br><span class="line">    document.cookie &#x3D; &#96;token&#x3D;$&#123;token&#125;&amp;$&#123;username&#125;;&#96;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>,这里前端是发送的FormData类型的，否则Django后端接收不到。这里的 document.cookie = `token=${token}&amp;${username};` 就是前端设置cookie token</p>
+</blockquote>
+<blockquote>
+<p>以上就基本解决了token的登陆问题，我写了一个简单的验证视图</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def islogin(request):</span><br><span class="line">    try:</span><br><span class="line">        token &#x3D; request.COOKIES[&#39;token&#39;]</span><br><span class="line">    except:</span><br><span class="line">        return HttpResponse(json.dumps(&#123;&#39;tips&#39;: &#39;您未登录&#39;&#125;))</span><br><span class="line">    token_list &#x3D; token.split(&#39;&amp;&#39;)</span><br><span class="line">    try:</span><br><span class="line">        if out_token(token_list[1], token_list[0]):</span><br><span class="line">            return HttpResponse(json.dumps(&#123;&#39;tips&#39;:&#39;登录成功,当前用户&#39;+token_list[1]&#125;))</span><br><span class="line">        else:</span><br><span class="line">            return HttpResponse(json.dumps(&#123;&#39;tips&#39;: &#39;您未登录&#39;&#125;))</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(e)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>前端vue代码全部如下:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;hello&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;label for&#x3D;&quot;username&quot;&gt;Username&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;Input v-model&#x3D;&quot;username&quot; placeholder&#x3D;&quot;Enter name&quot; id&#x3D;&quot;username&quot; style&#x3D;&quot;width: auto&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;label for&#x3D;&quot;password&quot;&gt;Password&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;Input v-model&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Enter password&quot; id&#x3D;&quot;password&quot; style&#x3D;&quot;width: auto&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;Button type&#x3D;&quot;primary&quot; @click&#x3D;&quot;handleLogin&quot; key&#x3D;&quot;login&quot;&gt;登录&lt;&#x2F;Button&gt;</span><br><span class="line">    &lt;Button type&#x3D;&quot;primary&quot; @click&#x3D;&quot;handleIsLogin&quot; key&#x3D;&quot;islogin&quot;&gt;测试是否登录&lt;&#x2F;Button&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import axios from &quot;axios&quot;;</span><br><span class="line">axios.defaults.withCredentials &#x3D; true;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &quot;Welcome to Your Vue.js App&quot;,</span><br><span class="line">      username: &quot;&quot;,</span><br><span class="line">      password: &quot;&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleLogin() &#123;</span><br><span class="line">      var _this &#x3D; this;</span><br><span class="line">      var username &#x3D; _this.username;</span><br><span class="line">      var password &#x3D; _this.password;</span><br><span class="line">      if (!(username &amp;&amp; password)) &#123;</span><br><span class="line">        this.$Modal.error(&#123;</span><br><span class="line">          title: &quot;错误&quot;,</span><br><span class="line">          content: &quot;用户名和密码不能为空&quot;</span><br><span class="line">        &#125;);</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      var data &#x3D; &#123;</span><br><span class="line">        username: _this.username,</span><br><span class="line">        password: _this.password</span><br><span class="line">      &#125;;</span><br><span class="line">      console.log(data);</span><br><span class="line">      const _data &#x3D; new FormData();</span><br><span class="line">      _data.append(&quot;username&quot;, _this.username);</span><br><span class="line">      _data.append(&quot;password&quot;, _this.password);</span><br><span class="line">      axios(&#123;</span><br><span class="line">        method: &quot;post&quot;,</span><br><span class="line">        url: &quot;http:&#x2F;&#x2F;127.0.0.1:8000&#x2F;backend&#x2F;login&quot;,</span><br><span class="line">        data: _data,</span><br><span class="line">        &#x2F;&#x2F; withCredentials: true</span><br><span class="line">      &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">        console.log(res.data);</span><br><span class="line">        _this.msg &#x3D; res.data;</span><br><span class="line">        const &#123; token &#125; &#x3D; res.data;</span><br><span class="line">        &#x2F;&#x2F;localStorage.setItem(&quot;sesssionid&quot;, sesssionid);</span><br><span class="line">        document.cookie &#x3D; &#96;token&#x3D;$&#123;token&#125;&amp;$&#123;username&#125;;&#96;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleIsLogin () &#123;</span><br><span class="line">      axios(&#123;</span><br><span class="line">        method: &quot;get&quot;,</span><br><span class="line">        url: &quot;http:&#x2F;&#x2F;127.0.0.1:8000&#x2F;backend&#x2F;islogin&quot;</span><br><span class="line">      &#125;).then(res&#x3D;&gt;&#123;</span><br><span class="line">        console.log(res.data);</span><br><span class="line">        var response &#x3D; res.data;</span><br><span class="line">        this.$Modal.info(&#123;</span><br><span class="line">          title: &#39;是否登陆&#39;,</span><br><span class="line">          content: response.tips</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h4><p><img src="http://qnpic.top/2019-05-23%5CGIF3.gif" alt="img"></p>
+<blockquote>
+<p>因为设置token过期时间为5秒，所以第一次验证为未登陆。</p>
+</blockquote>
+<blockquote>
+<p>这次的token设置也是简单讲解成功了</p>
+</blockquote>
+<h2 id="前后端分离开发登录验证——header验证"><a href="#前后端分离开发登录验证——header验证" class="headerlink" title="前后端分离开发登录验证——header验证"></a>前后端分离开发登录验证——header验证</h2><blockquote>
+<p>在前一步我也是实现了在cookie的验证，但是在今天我在进一步做前后端分离项目的时候，服务我的cookie验证不行了，原因是axios发送的请求并没有携带上cookie。很桑心<del>~</del>，也是半天解决不了。emmm，下次再弄吧。所以，就有了这个解决方法，把token验证放在header里，一样的思路，也是一样的方法。</p>
+</blockquote>
+<h3 id="前提准备"><a href="#前提准备" class="headerlink" title="前提准备"></a>前提准备</h3><blockquote>
+<p>前提准备也是一模一样</p>
+</blockquote>
+<ul>
+<li><p>1.安装 <code>django-cors-headers</code></p>
+</li>
+<li><p>2.添加应用，在settings里面配置</p>
+</li>
+<li><p>3.中间件配置，在settings里面配置</p>
+</li>
+<li><p>4.添加白名单,如我的前端服务部署在8080端口</p>
+</li>
+<li><p>5.settings配置 <code>APPEND_SLASH = False</code></p>
+</li>
+</ul>
+<blockquote>
+<p>以上就是django 后端的配置，这样前端就可以向后端发送请求。</p>
+</blockquote>
+<h3 id="前端配置"><a href="#前端配置" class="headerlink" title="前端配置"></a>前端配置</h3><blockquote>
+<p>1.封装axios</p>
+<blockquote>
+<p><code>axios</code> 最好的地方就是可以进行封装，加上请求和回应拦截器，vue-cli项目的目录如上，我们在原有的目录基础上新建<strong>api与libs文件夹，libs里新建request.js文件，request.js代码如下：</strong></p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import &#123;</span><br><span class="line">  Message,</span><br><span class="line">  Loading</span><br><span class="line">&#125; from &#39;element-ui&#39;</span><br><span class="line">import router from &#39;..&#x2F;router&#x2F;index.js&#39;  &#x2F;&#x2F;注意路径与文件名</span><br><span class="line"></span><br><span class="line">const service &#x3D; axios.create(&#123;</span><br><span class="line">  baseURL: &#39;http:&#x2F;&#x2F;127.0.0.1:8000&#39;, &#x2F;&#x2F; api 的 base_url</span><br><span class="line">  timeout: 50000 &#x2F;&#x2F; request timeout</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">let loading &#x2F;&#x2F; 定义loading变量</span><br><span class="line"></span><br><span class="line">function startLoading () &#123; &#x2F;&#x2F; 使用Element loading-start 方法</span><br><span class="line">  loading &#x3D; Loading.service(&#123;</span><br><span class="line">    lock: true,</span><br><span class="line">    text: &#39;加载中...&#39;,</span><br><span class="line">    background: &#39;rgba(0, 0, 0, 0.7)&#39;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function endLoading () &#123; &#x2F;&#x2F; 使用Element loading-close 方法</span><br><span class="line">  loading.close()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 请求拦截  设置统一header</span><br><span class="line">service.interceptors.request.use(</span><br><span class="line">  config &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 加载</span><br><span class="line">    startLoading()</span><br><span class="line">    if (localStorage.token) &#123;</span><br><span class="line">      config.headers.Authorization &#x3D; localStorage.token</span><br><span class="line">    &#125;</span><br><span class="line">    return config</span><br><span class="line">  &#125;,</span><br><span class="line">  error &#x3D;&gt; &#123;</span><br><span class="line">    return Promise.reject(error)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 响应拦截  401 token过期处理</span><br><span class="line">service.interceptors.response.use(</span><br><span class="line">  response &#x3D;&gt; &#123;</span><br><span class="line">    endLoading()</span><br><span class="line">    return response</span><br><span class="line">  &#125;,</span><br><span class="line">  error &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 错误提醒</span><br><span class="line">    endLoading()</span><br><span class="line">    Message.error(error.response.data)</span><br><span class="line"></span><br><span class="line">    const &#123; status &#125; &#x3D; error.response</span><br><span class="line">    if (status &#x3D;&#x3D;&#x3D; 401) &#123;</span><br><span class="line">      Message.error(&#39;token值无效，请重新登录&#39;)</span><br><span class="line">      &#x2F;&#x2F; 清除token</span><br><span class="line">      localStorage.removeItem(&#39;token&#39;)</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; 页面跳转</span><br><span class="line">      router.push(&#39;&#x2F;login&#39;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Promise.reject(error)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">export default service</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在<code>request.js</code>中做了三件事</p>
+</blockquote>
+<ul>
+<li>1.创建axios，设置<code>baseURL</code>和超时时间</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const service &#x3D; axios.create(&#123;</span><br><span class="line">  baseURL: &#39;http:&#x2F;&#x2F;127.0.0.1:8000&#39;, &#x2F;&#x2F; api 的 base_url</span><br><span class="line">  timeout: 50000 &#x2F;&#x2F; request timeout</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2.拦截请求</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 请求拦截  设置统一header</span><br><span class="line">service.interceptors.request.use(</span><br><span class="line">  config &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 加载</span><br><span class="line">    startLoading()</span><br><span class="line">    if (localStorage.token) &#123;</span><br><span class="line">      config.headers.Authorization &#x3D; localStorage.token</span><br><span class="line">    &#125;</span><br><span class="line">    return config</span><br><span class="line">  &#125;,</span><br><span class="line">  error &#x3D;&gt; &#123;</span><br><span class="line">    return Promise.reject(error)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3.拦截响应</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 响应拦截  401 token过期处理</span><br><span class="line">service.interceptors.response.use(</span><br><span class="line">  response &#x3D;&gt; &#123;</span><br><span class="line">    endLoading()</span><br><span class="line">    return response</span><br><span class="line">  &#125;,</span><br><span class="line">  error &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 错误提醒</span><br><span class="line">    endLoading()</span><br><span class="line">    Message.error(error.response.data)</span><br><span class="line"></span><br><span class="line">    const &#123; status &#125; &#x3D; error.response</span><br><span class="line">    if (status &#x3D;&#x3D;&#x3D; 401) &#123;</span><br><span class="line">      Message.error(&#39;token值无效，请重新登录&#39;)</span><br><span class="line">      &#x2F;&#x2F; 清除token</span><br><span class="line">      localStorage.removeItem(&#39;token&#39;)</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; 页面跳转</span><br><span class="line">      router.push(&#39;&#x2F;login&#39;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Promise.reject(error)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>项目中我用了element-ui组件库，Message是一个消息弹框，Loading是加载图</p>
+</blockquote>
+<h3 id="登录案列"><a href="#登录案列" class="headerlink" title="登录案列"></a>登录案列</h3><blockquote>
+<p>封装完了axios，我们通过一个登录案例来看看如何在项目中使用。</p>
+</blockquote>
+<blockquote>
+<p>登录首先撸个界面，放两个input框和一个button,login.vue界面<br>撸完界面我们在来到api文件夹，建立一个login.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import request from &#39;@&#x2F;libs&#x2F;request&#39;</span><br><span class="line">import qs from &#39;qs&#39;</span><br><span class="line"></span><br><span class="line">export function doLogin (username, password) &#123;</span><br><span class="line">  let data &#x3D; &#123;</span><br><span class="line">    username,</span><br><span class="line">    password</span><br><span class="line">  &#125;</span><br><span class="line">  data &#x3D; qs.stringify(data)</span><br><span class="line">  return request(&#123;</span><br><span class="line">    url: &#39;&#x2F;backend&#x2F;login&#39;,</span><br><span class="line">    method: &#39;post&#39;,</span><br><span class="line">    data</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我这里引入了qs库，qs.stringify()可以将对象转成字符串形式，这是因为后台接口的要求，一般来说axios传入data对象即可<br>代码里有一个<strong>doLogin</strong>方法，接收两个参数：用户名和密码<br>然后直接调用request.js中封装的axios发送post请求</p>
+</blockquote>
+<blockquote>
+<p>最后就是在login.vue 运用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; doLogin &#125; from &#39;@&#x2F;api&#x2F;login&#39;</span><br><span class="line">import request from &#39;@&#x2F;libs&#x2F;request&#39;</span><br><span class="line">export default &#123;</span><br><span class="line">  &#x2F;&#x2F;...</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleLogin() &#123;</span><br><span class="line">      var _this &#x3D; this;</span><br><span class="line">      var username &#x3D; _this.username;</span><br><span class="line">      var password &#x3D; _this.password;</span><br><span class="line">      if (!(username &amp;&amp; password)) &#123;</span><br><span class="line">        this.$Modal.error(&#123;</span><br><span class="line">          title: &quot;错误&quot;,</span><br><span class="line">          content: &quot;用户名和密码不能为空&quot;</span><br><span class="line">        &#125;);</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      doLogin(username,password).then(res&#x3D;&gt;&#123;</span><br><span class="line">        console.log(res)</span><br><span class="line">        if(res.data.status &#x3D;&#x3D;&#x3D; 200)&#123;</span><br><span class="line">          const &#123;token&#125; &#x3D; res.data;</span><br><span class="line">          this.$Modal.info(&#123;</span><br><span class="line">            title: &quot;success&quot;,</span><br><span class="line">            content: &quot;登陆成功&quot;</span><br><span class="line">          &#125;);</span><br><span class="line">          localStorage.setItem(&#39;token&#39;, &#96;$&#123;token&#125;&amp;$&#123;username&#125;&#96;)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          this.$Modal.error(&#123;</span><br><span class="line">            title: &quot;failure&quot;,</span><br><span class="line">            content: &quot;登陆失败&quot;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    handleIsLogin () &#123;</span><br><span class="line">      request(&#123;</span><br><span class="line">        method: &quot;get&quot;,</span><br><span class="line">        url: &quot;&#x2F;backend&#x2F;islogin&quot;,</span><br><span class="line">        withCredentials: true</span><br><span class="line">      &#125;).then(res&#x3D;&gt;&#123;</span><br><span class="line">        console.log(res.data);</span><br><span class="line">        var response &#x3D; res.data;</span><br><span class="line">        this.$Modal.info(&#123;</span><br><span class="line">          title: &#39;是否登陆&#39;,</span><br><span class="line">          content: response.tips</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上定义了两个方法，一个是登录，一个是测试时候登录，后端验证的方法可以看前一章节——cookie的验证登录，但是后端django获取request的header的方法可能得去自行baidu一下。这里是request.META.get(‘HTTP_AUTHORIZATION’).实现效果如下</p>
+</blockquote>
+<p><img src="http://qnpic.top/2019-05-26%5CGIF.gif" alt="img"></p>
+<blockquote>
+<p>这一部分，重要的部分就是axios的配置拦截器，加上header，其余的部分和上一章节是一样的。</p>
+</blockquote>
+<h3 id="路由拦截"><a href="#路由拦截" class="headerlink" title="路由拦截"></a>路由拦截</h3><blockquote>
+<p>上面实现了登录的功能，但还不够完善，仅仅这样做，未登录的用户直接在浏览器中输入地址不是一样可以访问页面？<br>这个问题也不难解决，vue-router为我们提供了<code>router.beforeEach</code>,在main.js中设置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to, from, next)&#x3D;&gt;&#123;</span><br><span class="line">  iView.LoadingBar.start();</span><br><span class="line">  let isLogin &#x3D; !!localStorage.token</span><br><span class="line">  console.log(isLogin)</span><br><span class="line">  if (to.path &#x3D;&#x3D;&#x3D; &#39;&#x2F;login&#39; || to.path &#x3D;&#x3D;&#x3D; &#39;&#x2F;register&#39;) &#123;</span><br><span class="line">    Util.title(to.meta.title);</span><br><span class="line">    next()</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    Util.title(to.meta.title);</span><br><span class="line">    isLogin ? next() : next(&#39;&#x2F;login&#39;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>加上如上代码，通过localStorage判断是否登录，如果路径不是登录注册的页面，则强制跳回登录界面</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/24/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" data-id="ck7ai03xm00087u079p0y86mv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/25/Django-%E5%90%8E%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E5%A4%84%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Django 后端图片优化处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/22/LightBlog-Django%E5%8D%9A%E5%AE%A2%E4%B8%8A%E7%BA%BF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LightBlog-Django博客上线</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

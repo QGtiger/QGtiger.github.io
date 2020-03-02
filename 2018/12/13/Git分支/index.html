@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Git分支 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Git分支的简单讲解 上一个博客也是写了Git的简单操作和使用，我也是好好的去恶习了一下，今天就来说一下Git的分支。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git分支">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/Git%E5%88%86%E6%94%AF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Git分支的简单讲解 上一个博客也是写了Git的简单操作和使用，我也是好好的去恶习了一下，今天就来说一下Git的分支。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7ktkij31gg0q6n25.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7nziej30gj09dac1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7qnf9j30gf0a640k.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7tyxmj30bu01vaa7.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7wgaej30ga0ab76t.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7z13kj30cf02p0t4.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd85khgj30ga0a4gnr.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd88h3bj30d001ujrf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd8bba8j30gg049wf4.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd8fuxzj30tf08twf2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfobfvxj30g406zdhq.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfofaibj315s0ep0xa.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfotsaaj310l0do0x0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfoxfg6j31200fm434.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfp3cqcj30e70f7756.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfp6py6j31200fktcx.jpg">
+<meta property="article:published_time" content="2018-12-13T09:05:00.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.947Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Git操作">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7ktkij31gg0q6n25.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Git分支" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/13/Git%E5%88%86%E6%94%AF/" class="article-date">
+  <time datetime="2018-12-13T09:05:00.000Z" itemprop="datePublished">2018-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git分支
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git分支的简单讲解"><a href="#Git分支的简单讲解" class="headerlink" title="Git分支的简单讲解"></a>Git分支的简单讲解</h1><blockquote>
+<p>上一个博客也是写了Git的简单操作和使用，我也是好好的去恶习了一下，今天就来说一下Git的分支。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="讲解环境"><a href="#讲解环境" class="headerlink" title="讲解环境"></a>讲解环境</h2><blockquote>
+<p>我把上次github的仓库给删了，重新创建了一个,这样可能看的更加的清楚</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7ktkij31gg0q6n25.jpg" alt="img"></p>
+<blockquote>
+<p>在本地我也是删除了以上的那个文件夹，重新来一遍，理一下思路</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7nziej30gj09dac1.jpg" alt="img"></p>
+<h2 id="讲解过程"><a href="#讲解过程" class="headerlink" title="讲解过程"></a>讲解过程</h2><blockquote>
+<ol>
+<li>先在<code>master</code>分支下创建<code>README.md</code>和<code>a.txt</code>，并输入一些信息<code>Hello Git</code>和<code>This is a.txt</code>。(初始化Git仓库就有<code>master</code>分支)</li>
+</ol>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7qnf9j30gf0a640k.jpg" alt="img"></p>
+<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><blockquote>
+<p>创建分支是用<code>git branch &lt;branch_name&gt;</code></p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7tyxmj30bu01vaa7.jpg" alt="img"></p>
+<blockquote>
+<p>嘿嘿<code>fatal: Not a valid object name: &#39;master&#39;</code>,你如果出现这个错误，是因为没有提交对象，要先commit一次<code>master</code>分支才是真正的建立,所以我们就<code>commit</code>咯</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7wgaej30ga0ab76t.jpg" alt="img"></p>
+<blockquote>
+<p><strong>注意</strong> <code>git branch</code>就是参看当前的分支哦~</p>
+</blockquote>
+<h3 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h3><blockquote>
+<p>切换分支是用<code>git checkout &lt;branch_name&gt;</code></p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd7z13kj30cf02p0t4.jpg" alt="img"></p>
+<p>切换到<code>feature1</code></p>
+<blockquote>
+<p>这里可以再扩展一下 <code>git checkout -b &lt;branch_name&gt;</code> 就是创建并跳转 记住哦是<code>git checkout -b</code></p>
+</blockquote>
+<h3 id="删除本地的分支"><a href="#删除本地的分支" class="headerlink" title="删除本地的分支"></a>删除本地的分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d feature1 # 删除分支</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果你在要删除的分支下，创建一些东西但是没有合并到主分支，他就可能就显示一些小错误，你可以使用<code>git branch -D</code>加你要删除的分支名。一般大写的都有一定的强制型</p>
+</blockquote>
+<h3 id="分支的功能"><a href="#分支的功能" class="headerlink" title="分支的功能"></a>分支的功能</h3><blockquote>
+<p>下面我们就用实例来了解git分支的作用和基本功能</p>
+</blockquote>
+<blockquote>
+<p>我们先在<code>feature1</code>的分支下，创建一个<code>b.txt</code>，并输入信息用于等会辨认</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd85khgj30ga0a4gnr.jpg" alt="img"></p>
+<blockquote>
+<p>在<code>feature1</code>分支下创建了b.txt并commit一次。commit完了后，我们就可以进行比较</p>
+</blockquote>
+<blockquote>
+<p><code>ls</code>查看<code>feature1</code>分支下的文件，发现有<code>a.txt</code>,这是因为我们是在<code>master</code>分支下创建了<code>feature1</code>的分支，你可以理解成在<code>master</code>下又引申出去了一条<code>feature1</code>分支，所以有着master分支下的a.txt</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd88h3bj30d001ujrf.jpg" alt="img"></p>
+<blockquote>
+<p>然后，我们在切换到master分支下查看</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd8bba8j30gg049wf4.jpg" alt="img"></p>
+<blockquote>
+<p>上面可以看到，在<code>master</code>分支下，只有原先的<code>a.txt</code>和<code>README.md</code>文件，这是符合我上述的理解</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxd8fuxzj30tf08twf2.jpg" alt="img"></p>
+<h2 id="上传到远程仓库"><a href="#上传到远程仓库" class="headerlink" title="上传到远程仓库"></a>上传到远程仓库</h2><blockquote>
+<p>上传到github上</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;QGtiger&#x2F;git_test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfobfvxj30g406zdhq.jpg" alt="img"></p>
+<blockquote>
+<p>相信这里我们就能很好的理解master的用意了，就是上传到远程仓库的master分支上，这个<code>-u</code>是为了第一次以后推送就只需要<code>git push</code>就行</p>
+</blockquote>
+<blockquote>
+<p>那能不能上传到分支上呢? 相信大家都大致能推理出来，就是用下列的代码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin feature1 # 后面这个feature1就是本地的分支名称哦</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfofaibj315s0ep0xa.jpg" alt="img"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfotsaaj310l0do0x0.jpg" alt="img"></p>
+<blockquote>
+<p>而且远程仓库的分支确实比master分支多了一个b.txt</p>
+</blockquote>
+<h3 id="上传的时候修改分支的名称"><a href="#上传的时候修改分支的名称" class="headerlink" title="上传的时候修改分支的名称"></a>上传的时候修改分支的名称</h3><blockquote>
+<p>在后面加<code>:</code>和你想要的分支名称</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin feature1:f2 # 后面这个feature1就是本地的分支名称哦</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfoxfg6j31200fm434.jpg" alt="img"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfp3cqcj30e70f7756.jpg" alt="img"></p>
+<h3 id="删除远程仓库的分支"><a href="#删除远程仓库的分支" class="headerlink" title="删除远程仓库的分支"></a>删除远程仓库的分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :f2 # 在你要删除的分支前加&#39;:&#39;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxfp6py6j31200fktcx.jpg" alt="img"></p>
+<p><br><br><br>这次的博客就基本到这了，讲解了git仓库的基本操作，So<br><br>Just for fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/13/Git%E5%88%86%E6%94%AF/" data-id="ck7ai040y002w7u07353i6eg6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/16/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%9B%9B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hexo+github搭建个人博客四
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/13/t-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%92%8C%E8%AE%B2%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Git 的一些基本操作和讲解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

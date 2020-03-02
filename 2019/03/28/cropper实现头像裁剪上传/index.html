@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>cropper实现头像裁剪上传 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Cropperjs+Ajax+Django实现头像裁剪上传 一直想实现头像的上传，但是我之间实现的只是简单的上传，上传的图片并没有进行处理，这样的话就很难进行二次的头像实现，所以这次就用到了Cropper,cropper是一款使用简单且功能强大的图片剪裁jQuery插件。So,今天就来简单阐述一下如何实现。关于具体的如何参数说明，可以看这篇博客——cropper.js 裁剪图片并上传">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cropper实现头像裁剪上传">
+<meta property="og:url" content="http://yoursite.com/2019/03/28/cropper%E5%AE%9E%E7%8E%B0%E5%A4%B4%E5%83%8F%E8%A3%81%E5%89%AA%E4%B8%8A%E4%BC%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Cropperjs+Ajax+Django实现头像裁剪上传 一直想实现头像的上传，但是我之间实现的只是简单的上传，上传的图片并没有进行处理，这样的话就很难进行二次的头像实现，所以这次就用到了Cropper,cropper是一款使用简单且功能强大的图片剪裁jQuery插件。So,今天就来简单阐述一下如何实现。关于具体的如何参数说明，可以看这篇博客——cropper.js 裁剪图片并上传">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qnpic.top/cropper%5C1.jpg">
+<meta property="og:image" content="http://qnpic.top/cropper%5C2.jpg">
+<meta property="og:image" content="http://qnpic.top/cropper%5C4.jpg">
+<meta property="og:image" content="http://qnpic.top/cropper%5C3.jpg">
+<meta property="article:published_time" content="2019-03-28T12:33:00.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.958Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qnpic.top/cropper%5C1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-cropper实现头像裁剪上传" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/28/cropper%E5%AE%9E%E7%8E%B0%E5%A4%B4%E5%83%8F%E8%A3%81%E5%89%AA%E4%B8%8A%E4%BC%A0/" class="article-date">
+  <time datetime="2019-03-28T12:33:00.000Z" itemprop="datePublished">2019-03-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Django/">Django</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      cropper实现头像裁剪上传
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Cropperjs-Ajax-Django实现头像裁剪上传"><a href="#Cropperjs-Ajax-Django实现头像裁剪上传" class="headerlink" title="Cropperjs+Ajax+Django实现头像裁剪上传"></a>Cropperjs+Ajax+Django实现头像裁剪上传</h1><blockquote>
+<p>一直想实现头像的上传，但是我之间实现的只是简单的上传，上传的图片并没有进行处理，这样的话就很难进行二次的头像实现，所以这次就用到了<code>Cropper</code>,<code>cropper</code>是一款使用简单且功能强大的图片剪裁jQuery插件。So,今天就来简单阐述一下如何实现。关于具体的如何参数说明，可以看这篇博客——<a href="https://blog.csdn.net/weixin_38023551/article/details/78792400" target="_blank" rel="noopener">cropper.js 裁剪图片并上传</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Django后台实现"><a href="#Django后台实现" class="headerlink" title="Django后台实现"></a>Django后台实现</h1><blockquote>
+<p>1.首先当然是后台的路由urls.py配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django.urls import path</span><br><span class="line">from . import views</span><br><span class="line"></span><br><span class="line">app_name&#x3D;&#39;cropper_img&#39;</span><br><span class="line"></span><br><span class="line">urlpatterns&#x3D;[</span><br><span class="line">    path(&#39;&#39;,views.index_views,name&#x3D;&quot;index_views&quot;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>2.浏览器也是通过路由然后找到了<code>views.py</code>里的视图函数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from django.shortcuts import render,HttpResponse</span><br><span class="line">from django.views.decorators.csrf import csrf_exempt</span><br><span class="line">from django.conf import settings</span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line"># Create your views here.</span><br><span class="line">@csrf_exempt</span><br><span class="line">def index_views(request):</span><br><span class="line">    if request.method &#x3D;&#x3D; &quot;GET&quot;:</span><br><span class="line">        return render(request, &#39;cropper_img.html&#39;)</span><br><span class="line">    else:</span><br><span class="line">        uploadimg &#x3D; request.FILES.get(&#39;uploadimg&#39;,&#39;&#39;)</span><br><span class="line">        img_name &#x3D; request.POST.get(&#39;img_name&#39;,&#39;&#39;)</span><br><span class="line">        fname &#x3D; &#39;&#123;&#125;&#x2F;cropper_img&#x2F;&#123;&#125;&#39;.format(settings.MEDIA_ROOT, img_name)</span><br><span class="line">        try:</span><br><span class="line">            with open(fname,&#39;wb&#39;) as f:</span><br><span class="line">                for c in uploadimg.chunks():</span><br><span class="line">                    f.write(c)</span><br><span class="line">            return HttpResponse(json.dumps(&#123;&#39;status&#39;:200,&#39;tips&#39;:&#39;上传成功&#39;&#125;))</span><br><span class="line">        except:</span><br><span class="line">            return HttpResponse(json.dumps(&#123;&#39;status&#39;:500,&#39;tips&#39;:&#39;上传失败&#39;&#125;))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>3.这里就简单实现了后台的管理，但有些细节的我这里就不多说了，比如<code>settings</code>里的配置，<code>MEDIA_ROOT</code>图片路径的配置，<code>templates</code>模板文件的配置，<code>static</code>静态文件的配置等等</p>
+</blockquote>
+<h1 id="JS配置"><a href="#JS配置" class="headerlink" title="JS配置"></a>JS配置</h1><blockquote>
+<p>因为篇幅有限这里就简单大概说一下流程，后面我会给出github源码。</p>
+</blockquote>
+<blockquote>
+<p>页面展示所需文件的引入</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;&#123;% static &#39;css&#x2F;cropper.min.css&#39; %&#125;&quot;&gt;</span><br><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;&#123;% static &#39;css&#x2F;ImgCropping.css&#39; %&#125;&quot;&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#123;% static &#39;js&#x2F;jquery-2.1.1.js&#39; %&#125;&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#123;% static &#39;js&#x2F;cropper.min.js&#39; %&#125;&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#123;% static &#39;js&#x2F;layer.js&#39; %&#125;&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>图片选择和展示</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;图像上传展示</span><br><span class="line">function selectImg(file) &#123;</span><br><span class="line">    if (!file.files || !file.files[0])&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    var reader &#x3D; new FileReader();</span><br><span class="line">    reader.onload &#x3D; function (evt) &#123;</span><br><span class="line">        var replaceSrc &#x3D; evt.target.result;</span><br><span class="line">        &#x2F;&#x2F;更换cropper的图片</span><br><span class="line">        $(&#39;#tailoringImg&#39;).cropper(&#39;replace&#39;,replaceSrc,false);&#x2F;&#x2F;默认false，适应高度，不失真</span><br><span class="line">    &#125;</span><br><span class="line">    reader.readAsDataURL(file.files[0]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/cropper%5C1.jpg" alt="img"></p>
+<blockquote>
+<p>图片之所以如上展示也是得益于cropper插件的原因，下面也是cropper的引用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;cropper图片裁剪</span><br><span class="line">$(&#39;#tailoringImg&#39;).cropper(&#123;</span><br><span class="line">    aspectRatio: 1&#x2F;1,&#x2F;&#x2F;默认比例</span><br><span class="line">    preview: &#39;.previewImg&#39;,&#x2F;&#x2F;预览视图</span><br><span class="line">    guides: true,  &#x2F;&#x2F;裁剪框的虚线(九宫格)</span><br><span class="line">    autoCropArea: 0.5,  &#x2F;&#x2F;0-1之间的数值，定义自动剪裁区域的大小，默认0.8</span><br><span class="line">    movable: false, &#x2F;&#x2F;是否允许移动图片</span><br><span class="line">    dragCrop: true,  &#x2F;&#x2F;是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域</span><br><span class="line">    movable: true,  &#x2F;&#x2F;是否允许移动剪裁框</span><br><span class="line">    resizable: true,  &#x2F;&#x2F;是否允许改变裁剪框的大小</span><br><span class="line">    zoomable: true,  &#x2F;&#x2F;是否允许缩放图片大小</span><br><span class="line">    mouseWheelZoom: true,  &#x2F;&#x2F;是否允许通过鼠标滚轮来缩放图片</span><br><span class="line">    touchDragZoom: true,  &#x2F;&#x2F;是否允许通过触摸移动来缩放图片</span><br><span class="line">    rotatable: true,  &#x2F;&#x2F;是否允许旋转图片</span><br><span class="line">    crop: function(e) &#123;</span><br><span class="line">        &#x2F;&#x2F; 输出结果数据裁剪图像。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>至于如何实现，我这里就不多家阐述了，可以问问<a href="https://www.baidu.com" target="_blank" rel="noopener">度娘</a>。</p>
+</blockquote>
+<blockquote>
+<p>裁剪后的处理</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;裁剪后的处理</span><br><span class="line">$(&quot;#sureCut&quot;).on(&quot;click&quot;,function () &#123;</span><br><span class="line">    if ($(&quot;#tailoringImg&quot;).attr(&quot;src&quot;) &#x3D;&#x3D; null )&#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        var cas &#x3D; $(&#39;#tailoringImg&#39;).cropper(&#39;getCroppedCanvas&#39;);&#x2F;&#x2F;获取被裁剪后的canvas</span><br><span class="line">        var base64url &#x3D; cas.toDataURL(&#39;image&#x2F;png&#39;); &#x2F;&#x2F;转换为base64地址形式</span><br><span class="line">        &#x2F;&#x2F;console.log(base64url);</span><br><span class="line">        $(&quot;#finalImg&quot;).prop(&quot;src&quot;,base64url);&#x2F;&#x2F;显示为图片的形式</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;关闭裁剪框</span><br><span class="line">        closeTailor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F;关闭裁剪框</span><br><span class="line">function closeTailor() &#123;</span><br><span class="line">    $(&quot;.tailoring-container&quot;).toggle();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/cropper%5C2.jpg" alt="img"></p>
+<blockquote>
+<p>上传功能的实现</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#uploadImg&#39;).on(&#39;click&#39;,function()&#123;</span><br><span class="line">    var uploadimg &#x3D; $(&#39;#finalImg&#39;).attr(&quot;src&quot;);&#x2F;&#x2F;获取base64图片的值</span><br><span class="line">    &#x2F;&#x2F;console.log(uploadimg);</span><br><span class="line">    if(!uploadimg)&#123;</span><br><span class="line">        layer.alert(&#39;请选择图片&#39;, &#123;</span><br><span class="line">            icon: 0,</span><br><span class="line">            closeBtn: 0,</span><br><span class="line">            skin: &#39;layer-ext-moon&#39;, </span><br><span class="line">            time: 5000,&#x2F;&#x2F;该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅</span><br><span class="line">            btn: [&#39;明白了&#39;,&#39;知道了&#39;]</span><br><span class="line">        &#125;,function()&#123;</span><br><span class="line">            layer.msg(&#39;明白就好&#39;,&#123;icon: 1&#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        bs64 &#x3D; uploadimg.split(&#39;,&#39;)[1];&#x2F;&#x2F;记得去掉前面的标签</span><br><span class="line">        &#x2F;&#x2F;下面就是如何转换为blob格式的方法</span><br><span class="line">        var binary &#x3D; atob(bs64);</span><br><span class="line">        var array &#x3D; [];</span><br><span class="line">        for (var i &#x3D; 0; i &lt; binary.length; i++) &#123;</span><br><span class="line">            array.push(binary.charCodeAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        var blob &#x3D;  new Blob([new Uint8Array(array)], &#123;type: &#39;image&#x2F;jpeg&#39;&#125;);</span><br><span class="line">        &#x2F;&#x2F;使用FormData()进行ajax请求，上传图片</span><br><span class="line">        var formdata &#x3D; new FormData()</span><br><span class="line">        &#x2F;&#x2F;图片名称</span><br><span class="line">        var img_name &#x3D; new Date().getTime()+&#39;.jpg&#39;;</span><br><span class="line">        formdata.append(&#39;uploadimg&#39;,blob);</span><br><span class="line">        formdata.append(&#39;img_name&#39;,img_name);</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: &quot;&#123;% url &#39;cropper_img:index_views&#39; %&#125;&quot;,</span><br><span class="line">            type: &#39;POST&#39;,</span><br><span class="line">            data: formdata,</span><br><span class="line">            dataType: &#39;json&#39;,</span><br><span class="line">            processData: false,</span><br><span class="line">            contentType: false,</span><br><span class="line">            success: function(e)&#123;</span><br><span class="line">                if(e[&#39;status&#39;]&#x3D;&#x3D;&#39;200&#39;)&#123;</span><br><span class="line">                    layer.msg(e[&#39;tips&#39;]);</span><br><span class="line">                &#125;else if(e[&#39;status&#39;&#x3D;&#x3D;&#39;500&#39;])&#123;</span><br><span class="line">                    layer.msg(e[&#39;tips&#39;]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/cropper%5C4.jpg" alt="img"></p>
+<p><img src="http://qnpic.top/cropper%5C3.jpg" alt="img"></p>
+<blockquote>
+<p>emmm,这次的博客就基本到这里了，简单了介绍了cropper插件配合django的实现，也是做个记录,<a href="https://github.com/QGtiger/DjangoProject/tree/master/uploadimg" target="_blank" rel="noopener">源码链接</a>,So</p>
+</blockquote>
+<p><br><br><br>Just have fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/28/cropper%E5%AE%9E%E7%8E%B0%E5%A4%B4%E5%83%8F%E8%A3%81%E5%89%AA%E4%B8%8A%E4%BC%A0/" data-id="ck7ai03yp001t7u075vn5d5nr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/28/layer-js-web-%E5%BC%B9%E5%B1%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          layer.js web 弹层
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/26/BaiduPCS-Go-web/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">百度云简单破解下载器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

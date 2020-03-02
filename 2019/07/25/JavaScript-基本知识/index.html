@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JavaScript 基本知识 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript 基础知识 本篇博客简单收录了JavaScript的一些基本知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 基本知识">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JavaScript 基础知识 本篇博客简单收录了JavaScript的一些基本知识点">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-07-25T07:29:23.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.949Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript-基本知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time datetime="2019-07-25T07:29:23.000Z" itemprop="datePublished">2019-07-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript 基本知识
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript-基础知识"><a href="#JavaScript-基础知识" class="headerlink" title="JavaScript 基础知识"></a>JavaScript 基础知识</h1><blockquote>
+<p>本篇博客简单收录了JavaScript的一些基本知识点</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="类的创建和继承"><a href="#类的创建和继承" class="headerlink" title="类的创建和继承"></a>类的创建和继承</h2><p>1）类的创建(es5)，new一个function，在这个function的prototype 里面增加属性和方法。</p>
+<p>下面创建了一个Animal 类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Animal(name)&#123;</span><br><span class="line">    this.name &#x3D; name || &#39;Animal&#39;;</span><br><span class="line">    this.sleep &#x3D; function()&#123;</span><br><span class="line">        console.log(this.name+&#39; is sleeping...&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;原型方法</span><br><span class="line">Animal.prototype.eat &#x3D; function(food)&#123;</span><br><span class="line">    console.log(this.name+&#39;is eatting &#39;+food);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2） 类的继承——原型链的继承</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Cat()&#123;&#125;</span><br><span class="line">Cat.prototype &#x3D; new Animal();</span><br><span class="line">Cat.prototype.name &#x3D; &#39;cat&#39;;</span><br><span class="line"></span><br><span class="line">var cat &#x3D; new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.eat(&#39;fish&#39;));</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(cat instanceof Animal); &#x2F;&#x2F;true</span><br><span class="line">console.log(cat instanceof Cat); &#x2F;&#x2F;true</span><br></pre></td></tr></table></figure>
+
+
+
+<p>构造继承：使用父类的构造函数来增强子类实例，等于复制了父类的实例属性（没用到原型）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Cat(name)&#123;</span><br><span class="line">Animal.call(this);</span><br><span class="line">this.name &#x3D; name || &#39;Tom&#39;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; Test Code</span><br><span class="line">var cat &#x3D; new Cat();</span><br><span class="line">console.log(cat.name);</span><br><span class="line">console.log(cat.sleep());</span><br><span class="line">console.log(cat instanceof Animal); &#x2F;&#x2F; false</span><br><span class="line">console.log(cat instanceof Cat); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>先看下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Animal&#123;</span><br><span class="line">	constructor(name)&#123;</span><br><span class="line">		this.name &#x3D; name || &#39;Animal&#39;;</span><br><span class="line">	&#125;</span><br><span class="line">	sleep()&#123;</span><br><span class="line">		console.log(this.name+&quot; is sleeping...&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let cat &#x3D; new Animal(&#39;cat&#39;)</span><br><span class="line">cat.sleep()</span><br><span class="line">&#x2F;&#x2F; cat is sleeping...</span><br><span class="line">Animal.prototype.eat &#x3D; (food)&#x3D;&gt;&#123;console.log(this.name+&quot; eat &quot;+food)&#125;</span><br><span class="line">&#x2F;&#x2F; (food)&#x3D;&gt;&#123;console.log(this.name+&quot; eat &quot;+food)&#125;</span><br><span class="line">cat.eat(&quot;fish&quot;)</span><br><span class="line">&#x2F;&#x2F; cat eat fish</span><br><span class="line"></span><br><span class="line">cat.__proto__.drink &#x3D; (x)&#x3D;&gt;&#123;console.log(this.name+&quot; drink &quot;+x)&#125;</span><br><span class="line">&#x2F;&#x2F; (x)&#x3D;&gt;&#123;console.log(this.name+&quot; drink &quot;+x)&#125;</span><br><span class="line">cat.drink(&quot;water&quot;)</span><br><span class="line">&#x2F;&#x2F; cat drink water</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>（以上是ES6的写法）JavaScript 是通过原型来实现继承的，在JS一个构造函数默认都带有一个prototype属性，这个属性值是一个<code>对象</code>，同时这个prototype对象自带有一个constructor属性，这个属性指向这个构造函数，同时每一个实例都会有一个<code>__proto__</code>属性指向这个prototype对象，我们可以把这个叫做隐式原型</p>
+<p>一下就是实例对象</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat</span><br><span class="line">Animal &#123;name: &quot;cat&quot;&#125;</span><br><span class="line">	name: &quot;cat&quot;</span><br><span class="line">	__proto__:</span><br><span class="line">        drink: (x)&#x3D;&gt;&#123;console.log(this.name+&quot; drink &quot;+x)&#125;</span><br><span class="line">        eat: (food)&#x3D;&gt;&#123;console.log(this.name+&quot; eat &quot;+food)&#125;</span><br><span class="line">        constructor: class Animal</span><br><span class="line">        sleep: ƒ sleep()</span><br><span class="line">        __proto__: Object</span><br></pre></td></tr></table></figure>
+
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p>每个对象都有一个私有属性: <code>__proto__</code>,这个属性指向它的构造函数的原型对象(prototype)。它的原型对象也有自己的原型对象。这样层层向上只至这个原型对象的属性为null。null没有自己的原型对象。</p>
+<p>除了原型属性<code>__proto__</code>获取对象的原型,还可以使用ES6的方法Object.getPrototypeOf获取对象的原型</p>
+</blockquote>
+<h3 id="继承方法"><a href="#继承方法" class="headerlink" title="继承方法"></a>继承方法</h3><p>当继承的函数被调用时，thi指向的当前继承的对象，而不是继承的函数所在的原型对象，如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">	a: <span class="number">2</span>,</span><br><span class="line">	m()&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.a;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">o.m()</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="built_in">Object</span>.create(o);</span><br><span class="line"><span class="comment">/*下面的两居和和上面的效果一样</span></span><br><span class="line"><span class="comment">	var p = &#123;&#125;;</span></span><br><span class="line"><span class="comment">	p.__proto__ = o;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">p.a = <span class="number">4</span></span><br><span class="line"><span class="comment">// 4</span></span><br><span class="line">p.m()</span><br><span class="line"><span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="proto-和prototype-的关系"><a href="#proto-和prototype-的关系" class="headerlink" title="__proto__和prototype 的关系"></a><code>__proto__</code>和prototype 的关系</h3><blockquote>
+<p><code>__proto__</code>属性指向构造当前对象的构造函数的原型(<code>prototype</code>),它保证了对象实例能够访问在构造函数原型中定义的所有属性和方法。</p>
+</blockquote>
+<blockquote>
+<p>JavaScript中的属性prototype是一个指针，prototype指向<strong>原型对象</strong>，这个对象包含了所有实例共享的属性和方法。prototype指向的原型对象又有一个属性<strong>constructor</strong>,这个属性也是一个指针，指向原构造函数，即这个方法。</p>
+</blockquote>
+<h2 id="JS-拖拽功能的实现"><a href="#JS-拖拽功能的实现" class="headerlink" title="JS 拖拽功能的实现"></a>JS 拖拽功能的实现</h2><blockquote>
+<p>首先是三个事件，分别是mousedown，mousemove，mouseup，当鼠标点下后，需要一个tag标识。执行到mousemove里面。clientX，clientY标识的是鼠标的坐标。并且使用offsetX和offsetY来表示元素的初始坐标。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;获取元素</span><br><span class="line">var dv &#x3D; document.getElementById(&#39;dv&#39;);</span><br><span class="line">var x &#x3D; 0;</span><br><span class="line">var y &#x3D; 0;</span><br><span class="line">var l &#x3D; 0;</span><br><span class="line">var t &#x3D; 0;</span><br><span class="line">var isDown &#x3D; false;</span><br><span class="line">&#x2F;&#x2F;鼠标按下事件</span><br><span class="line">dv.onmousedown &#x3D; function(e) &#123;</span><br><span class="line">    &#x2F;&#x2F;获取x坐标和y坐标</span><br><span class="line">    x &#x3D; e.clientX;</span><br><span class="line">    y &#x3D; e.clientY;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;获取左部和顶部的偏移量</span><br><span class="line">    l &#x3D; dv.offsetLeft;</span><br><span class="line">    t &#x3D; dv.offsetTop;</span><br><span class="line">    &#x2F;&#x2F;开关打开</span><br><span class="line">    isDown &#x3D; true;</span><br><span class="line">    &#x2F;&#x2F;设置样式  </span><br><span class="line">    dv.style.cursor &#x3D; &#39;move&#39;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;鼠标移动</span><br><span class="line">window.onmousemove &#x3D; function(e) &#123;</span><br><span class="line">    if (isDown &#x3D;&#x3D; false) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;获取x和y</span><br><span class="line">    var nx &#x3D; e.clientX;</span><br><span class="line">    var ny &#x3D; e.clientY;</span><br><span class="line">    &#x2F;&#x2F;计算移动后的左偏移量和顶部的偏移量</span><br><span class="line">    var nl &#x3D; nx - (x - l);</span><br><span class="line">    var nt &#x3D; ny - (y - t);</span><br><span class="line"></span><br><span class="line">    dv.style.left &#x3D; nl + &#39;px&#39;;</span><br><span class="line">    dv.style.top &#x3D; nt + &#39;px&#39;;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;鼠标抬起事件</span><br><span class="line">dv.onmouseup &#x3D; function() &#123;</span><br><span class="line">    &#x2F;&#x2F;开关关闭</span><br><span class="line">    isDown &#x3D; false;</span><br><span class="line">    dv.style.cursor &#x3D; &#39;default&#39;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异步加载js的方法"><a href="#异步加载js的方法" class="headerlink" title="异步加载js的方法"></a>异步加载js的方法</h2><blockquote>
+<p>defer属性和async</p>
+</blockquote>
+<h2 id="实现一个once的函数，传入函数参数只执行一次"><a href="#实现一个once的函数，传入函数参数只执行一次" class="headerlink" title="实现一个once的函数，传入函数参数只执行一次"></a>实现一个once的函数，传入函数参数只执行一次</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function once(func)&#123;</span><br><span class="line">    let tag &#x3D; true;</span><br><span class="line">    return function()&#123;</span><br><span class="line">        if(tag &#x3D;&#x3D; true)&#123;</span><br><span class="line">            func.apply(null,argument);</span><br><span class="line">            tag &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">        return undefined;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将原生的ajax封装成promise"><a href="#将原生的ajax封装成promise" class="headerlink" title="将原生的ajax封装成promise"></a>将原生的ajax封装成promise</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var myNewAjax &#x3D; function(url)&#123;</span><br><span class="line">    return new Promise(function(resolve, reject)&#123;</span><br><span class="line">        var xhr &#x3D; new XMLHttpRequest();</span><br><span class="line">        xhr.open(&#39;get&#39;, url);</span><br><span class="line">        xhr.send(data);</span><br><span class="line">        xhr.onreadystatechange &#x3D; function()&#123;</span><br><span class="line">            if(xhr.status &#x3D;&#x3D; 200 &amp;&amp; readyStatus &#x3D;&#x3D; 4)&#123;</span><br><span class="line">                var json &#x3D; JSON.parse(xhr.responseText);</span><br><span class="line">                resolve(json)</span><br><span class="line">            &#125;else if(xhr.readyStatus &#x3D;&#x3D; 4 &amp;&amp; xhr.status!&#x3D;200)&#123;</span><br><span class="line">                reject(&#39;error&#39;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码的执行顺序"><a href="#代码的执行顺序" class="headerlink" title="代码的执行顺序"></a>代码的执行顺序</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">1</span>)&#125;,<span class="number">0</span>);</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">	resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">4</span>)&#125;);</span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="number">5</span>)&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
+
+<p>具体参考如下文章</p>
+<p><a href="https://github.com/forthealllight/blog/issues/5" target="_blank" rel="noopener">https://github.com/forthealllight/blog/issues/5</a></p>
+<h2 id="如何实现sleep的效果"><a href="#如何实现sleep的效果" class="headerlink" title="如何实现sleep的效果"></a>如何实现sleep的效果</h2><h3 id="1-while-循环"><a href="#1-while-循环" class="headerlink" title="1.while 循环"></a>1.while 循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function sleep(ms)&#123;</span><br><span class="line">    let start &#x3D; Date.now();</span><br><span class="line">    expire &#x3D; start + ms;</span><br><span class="line">    while(Date.now()&lt;expire);</span><br><span class="line">    console.log(&quot;sleep function&quot;);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-promise-来实现"><a href="#2-promise-来实现" class="headerlink" title="2.promise 来实现"></a>2.promise 来实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function sleep(ms)&#123;</span><br><span class="line">    let temple &#x3D; new Promise((resolve)&#x3D;&gt;&#123;</span><br><span class="line">        console.log(&#96;sleeping $&#123;ms&#125;ms&#96;);</span><br><span class="line">        setTimeout(()&#x3D;&gt;&#123;resolve(ms)&#125;, ms);</span><br><span class="line">    &#125;);</span><br><span class="line">    return temple;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sleep(1000).then((ms)&#x3D;&gt;&#123;</span><br><span class="line">    console.log(&#96;slept $&#123;ms&#125;ms&#96;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-通过Generator函数来实现"><a href="#3-通过Generator函数来实现" class="headerlink" title="3.通过Generator函数来实现"></a>3.通过Generator函数来实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function* sleep(ms)&#123;</span><br><span class="line">    yield new Promise((resolve, reject)&#x3D;&gt;&#123;</span><br><span class="line">        console.log(&#96;sleeping $&#123;ms&#125;ms...&#96;);</span><br><span class="line">        setTimeout(()&#x3D;&gt;&#123;resolve(ms)&#125;, ms);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">sleep(1000).next().value.then((ms)&#x3D;&gt;&#123;console.log(&#96;slept $&#123;ms&#125;ms&#96;)&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象深度克隆的简单实现"><a href="#对象深度克隆的简单实现" class="headerlink" title="对象深度克隆的简单实现"></a>对象深度克隆的简单实现</h2><blockquote>
+<p>这里我简单拓展下，数组，set，map或者类似数组的数据结构，可以用<code>...</code>来操作</p>
+<p>如：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b1 = [...a1]</span><br><span class="line"></span><br><span class="line">a2 = <span class="keyword">new</span> <span class="built_in">Map</span>().set(<span class="string">"a"</span>,<span class="number">1</span>).set(<span class="string">"b"</span>,<span class="number">2</span>)</span><br><span class="line">b2 = <span class="keyword">new</span> <span class="built_in">Map</span>([...a2])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ES5的常用的对象克隆的一种方式。注意数组是对象，但是跟对象又有一定区别，所以我们一开始判断了一些类型，决定newObj是对象还是数组~</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function deepClone(obj)&#123;</span><br><span class="line">    let newObj &#x3D; obj instanceof Array ? []:&#123;&#125;;</span><br><span class="line">    for(let item in obj)&#123;</span><br><span class="line">        let temple &#x3D; typeof obj[item] &#x3D;&#x3D; &#39;object&#39; ? deepClone(obj[item]):obj[item];</span><br><span class="line">        newObj[item] &#x3D; temple;</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="js-判断类型"><a href="#js-判断类型" class="headerlink" title="js 判断类型"></a>js 判断类型</h2><blockquote>
+<p>判断方法： typeof(), instanceof, Object.prototype.toString.call()等</p>
+<p><strong>注意</strong>  ： 比如要判断数组，不能使用typeof ，因为它识别的是object</p>
+</blockquote>
+<h2 id="数组的常用方法"><a href="#数组的常用方法" class="headerlink" title="数组的常用方法"></a>数组的常用方法</h2><p>push()，pop()，shift()，unshift()，splice()，sort()，reverse()，map(), forEach, entries(), slice(), keys, values, every, some等</p>
+<h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><ul>
+<li><ol>
+<li>indexOf 循环去重</li>
+<li>ES6 Set 去重 ; […new Set(array)] 或者 Array.from(new Set(array))</li>
+<li>Object 键值对去重；把数组的值存成 Object 的 key 值，比如 Object[value1] = true，在判断另一个值的时候，如果 Object[value2]存在的话，就说明该值是重复的</li>
+</ol>
+</li>
+</ul>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>什么是闭包：</p>
+<p>闭包是指有权访问另外一个函数作用域中的变量的函数。</p>
+<p>闭包就是函数的局部变量集合，只是这些局部变量在函数返回后会继续存在。闭包就是函数的“堆栈”在函数返回后并不释放。如下就是闭包的一个简单的实用方法(计数器)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var add &#x3D; (function () &#123;</span><br><span class="line">    var counter &#x3D; 0;</span><br><span class="line">    return function () &#123;return counter +&#x3D; 1;&#125;</span><br><span class="line">&#125;)();</span><br><span class="line"> </span><br><span class="line">add();</span><br><span class="line">add();</span><br><span class="line">add();</span><br><span class="line">&#x2F;&#x2F;计算器为3</span><br></pre></td></tr></table></figure>
+
+<h2 id="去除字符串首尾空格"><a href="#去除字符串首尾空格" class="headerlink" title="去除字符串首尾空格"></a>去除字符串首尾空格</h2><p>使用正则<code>(^\s*)|(\s*$)</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"  aaa "</span>.replace(<span class="regexp">/(^\s*)|(\s*$)/g</span>,<span class="string">""</span>)</span><br><span class="line"><span class="string">"aaa"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="JS中继承实现的几种方式"><a href="#JS中继承实现的几种方式" class="headerlink" title="JS中继承实现的几种方式"></a>JS中继承实现的几种方式</h2><p>1、原型链继承，将父类的实例作为子类的原型，他的特点是实例是子类的实例也是父类的实例，父类新增的原型方法/属性，子类都能够访问，并且原型链继承简单易于实现，缺点是来自原型对象的所有属性被所有实例共享，无法实现多继承，无法向父类构造函数传参。</p>
+<p>2、构造继承，使用父类的构造函数来增强子类实例，即复制父类的实例属性给子类，</p>
+<p>构造继承可以向父类传递参数，可以实现多继承，通过call多个父类对象。但是构造继承只能继承父类的实例属性和方法，不能继承原型属性和方法，无法实现函数服用，每个子类都有父类实例函数的副本，影响性能</p>
+<p>3、实例继承，为父类实例添加新特性，作为子类实例返回，实例继承的特点是不限制调用方法，不管是new 子类（）还是子类（）返回的对象具有相同的效果，缺点是实例是父类的实例，不是子类的实例，不支持多继承</p>
+<p>4、拷贝继承：特点：支持多继承，缺点：效率较低，内存占用高（因为要拷贝父类的属性）无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）</p>
+<p>5、组合继承：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用</p>
+<p>6、寄生组合继承：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点</p>
+<h2 id="写一个函数，每秒打印"><a href="#写一个函数，每秒打印" class="headerlink" title="写一个函数，每秒打印"></a>写一个函数，每秒打印</h2><ul>
+<li><ol>
+<li>let 块级作用域</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i)</span><br><span class="line">    &#125;, <span class="number">1000</span>*i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里一定要var，否则都是输出5</p>
+<ul>
+<li>2.闭包</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(i)</span><br><span class="line">        &#125;, <span class="number">1000</span>*i)</span><br><span class="line">    &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="综合深拷贝"><a href="#综合深拷贝" class="headerlink" title="综合深拷贝"></a>综合深拷贝</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Deepclone</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> copy;</span><br><span class="line">    <span class="keyword">switch</span>(<span class="keyword">typeof</span> obj)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"undefined"</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"number"</span>:</span><br><span class="line">        copy = obj - <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"string"</span>:</span><br><span class="line">        copy = obj + <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"boolean"</span>:</span><br><span class="line">        copy = obj;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"object"</span>:</span><br><span class="line">        <span class="keyword">if</span>(obj === <span class="literal">null</span>)&#123;</span><br><span class="line">            copy = <span class="literal">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">Object</span>.prototype.toString.call(obj).slice(<span class="number">8</span>,<span class="number">-1</span>) === <span class="string">"Array"</span>)&#123;</span><br><span class="line">                copy = [];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; obj.length; i++)&#123;</span><br><span class="line">                    copy.push(Deepclone(obj[i]));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                copy = &#123;&#125;;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">var</span> j <span class="keyword">in</span> obj)&#123;</span><br><span class="line">                    copy[j] = Deepclone(obj[j])</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">        copy = obj;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" data-id="ck7ai041h003q7u07fvxm6z2x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSS 基本知识
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/17/Vue-%E9%9D%A2%E8%AF%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue 面试</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

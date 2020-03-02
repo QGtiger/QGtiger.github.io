@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Django 上线部署准备 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Django 静态文件处理 一般Django项目上线部署的时候都是要设置settings文件中的Debug改成false和ALLOWED_HOSTS &#x3D; [&#39;*&#39;],这里的DEBUG设置成False后，Django就不会自动搜索静态文件。这里的话，你首先得了解STATIC_ROOT是什么，你可以看这篇文章——STATIC_ROOT、STATICFILES_DIRS和MEDIA_RO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django 上线部署准备">
+<meta property="og:url" content="http://yoursite.com/2019/05/07/Django-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%87%86%E5%A4%87/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Django 静态文件处理 一般Django项目上线部署的时候都是要设置settings文件中的Debug改成false和ALLOWED_HOSTS &#x3D; [&#39;*&#39;],这里的DEBUG设置成False后，Django就不会自动搜索静态文件。这里的话，你首先得了解STATIC_ROOT是什么，你可以看这篇文章——STATIC_ROOT、STATICFILES_DIRS和MEDIA_RO">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qnpic.top/django_404%5C1.jpg">
+<meta property="og:image" content="http://qnpic.top/django_404%5C404.gif">
+<meta property="article:published_time" content="2019-05-07T09:24:00.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.944Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qnpic.top/django_404%5C1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Django-上线部署准备" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/07/Django-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%87%86%E5%A4%87/" class="article-date">
+  <time datetime="2019-05-07T09:24:00.000Z" itemprop="datePublished">2019-05-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Django/">Django</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django 上线部署准备
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Django-静态文件处理"><a href="#Django-静态文件处理" class="headerlink" title="Django 静态文件处理"></a>Django 静态文件处理</h1><blockquote>
+<p>一般Django项目上线部署的时候都是要设置settings文件中的Debug改成false和<code>ALLOWED_HOSTS = [&#39;*&#39;]</code>,这里的DEBUG设置成False后，Django就不会自动搜索静态文件。这里的话，你首先得了解STATIC_ROOT是什么，你可以看这篇文章——<a href="https://stackoverflow.com/questions/24022558/differences-between-staticfiles-dir-static-root-and-media-root" target="_blank" rel="noopener">STATIC_ROOT、STATICFILES_DIRS和MEDIA_ROOT的区别</a>,或者看<a href="https://docs.djangoproject.com/en/2.2/ref/settings/" target="_blank" rel="noopener">settings官方文档</a></p>
+</blockquote>
+<a id="more"></a>
+
+<blockquote>
+<ul>
+<li>1.<code>MEDIA_ROOT</code> 是存放上传的文件，如我的LightBlog就是存放上传的头像</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>2.<code>STATIC_ROOT</code> 用来存储使用<code>python manage.py collectstatic</code>命令收集起来的静态文件</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>3.<code>STATICFILES_DIRS</code> 是Django将搜索除static安装的每个应用程序的文件夹之外的其他静态文件的文件夹列表。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>在上线部署的时候可以使用Django来处理静态文件，也可以使用nginx处理静态文件，这里给出Django处理静态文件的办法。</p>
+</blockquote>
+<h2 id="settings配置模板文件路径"><a href="#settings配置模板文件路径" class="headerlink" title="settings配置模板文件路径"></a>settings配置模板文件路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATES &#x3D; [</span><br><span class="line">    &#123;</span><br><span class="line">        &#39;BACKEND&#39;: &#39;django.template.backends.django.DjangoTemplates&#39;,</span><br><span class="line">        &#39;DIRS&#39;: [</span><br><span class="line">                    os.path.join(BASE_DIR,&#39;templates&#39;),</span><br><span class="line">                 ],</span><br><span class="line">        &#39;APP_DIRS&#39;: False,  # 自定义模板位置，不在允许按照默认方式寻找模板文件</span><br><span class="line">        &#39;OPTIONS&#39;: &#123;</span><br><span class="line">            &#39;context_processors&#39;: [</span><br><span class="line">                &#39;django.template.context_processors.debug&#39;,</span><br><span class="line">                &#39;django.template.context_processors.request&#39;,</span><br><span class="line">                &#39;django.contrib.auth.context_processors.auth&#39;,</span><br><span class="line">                &#39;django.contrib.messages.context_processors.messages&#39;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="settings-配置STATIC-ROOT等"><a href="#settings-配置STATIC-ROOT等" class="headerlink" title="settings 配置STATIC_ROOT等"></a>settings 配置STATIC_ROOT等</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">STATIC_URL &#x3D; &#39;&#x2F;static&#x2F;&#39;</span><br><span class="line"># 项目根目录下的static文件夹</span><br><span class="line">STATIC_ROOT &#x3D; os.path.join(BASE_DIR,&#39;static&#39;)</span><br><span class="line"></span><br><span class="line">STATICFILES_DIRS &#x3D; [</span><br><span class="line">    os.path.join(BASE_DIR,&#39;media&#39;),</span><br><span class="line">    #os.path.join(BASE_DIR,&#39;static&#39;) #这个debug配置成false后就不能会上面的STATIC_ROOT相冲</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">MEDIA_ROOT &#x3D; os.path.join(BASE_DIR,&#39;media&#39;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="在urls-添加"><a href="#在urls-添加" class="headerlink" title="在urls 添加"></a>在urls 添加</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django.views import static</span><br><span class="line">from django.conf import settings</span><br><span class="line">from django.conf.urls import url</span><br><span class="line"></span><br><span class="line">urlpatterns &#x3D; [</span><br><span class="line">    url(r&#39;static&#x2F;(?P&lt;path&gt;.*)$&#39;, static.serve, &#123;&#39;document_root&#39;: settings.STATIC_ROOT&#125;, name&#x3D;&#39;static&#39;),</span><br><span class="line">    url(r&#39;^media&#x2F;(?P&lt;path&gt;.*)$&#39;, static.serve, &#123;&#39;document_root&#39;: settings.MEDIA_ROOT&#125;, name&#x3D;&#39;media&#39;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h1 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h1><blockquote>
+<p>网站的异常是一个普遍存在的机制，常见的异常以404或500为主，异常的出现主要是网站自身的数据缺陷或者人为不合理的访问所导致。这里就简单介绍下自定义404界面</p>
+</blockquote>
+<blockquote>
+<p>由于网站的404异常时作用于整个网站，因此在项目下的同名文件夹下的urls.py中进行设置404信息，代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 项目LightBlog下的urls.py</span><br><span class="line">from article import views</span><br><span class="line">handler404 &#x3D; views.page_not_found</span><br><span class="line">handler500 &#x3D; views.page_not_found</span><br><span class="line"></span><br><span class="line"># 或者</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">handler404 &#x3D; &quot;article.views.page_not_found&quot;</span><br><span class="line"></span><br><span class="line">即：handler404 &#x3D; “应用名称.views.函数名称” </span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以看到网站的404和500异常信息都由 article 下的views.py下的page_not_found视图函数进行处理。article是注册的app应用。page_not_found视图函数代码如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 404,505页面</span><br><span class="line">def page_not_found(request, exception):</span><br><span class="line">    return render(request, &#39;404&#x2F;error404.html&#39;, status&#x3D;404)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面面的参数exception是我在上ubuntu服务器上运行的时候所报错误加上去的，本地没有也是可以运行的，不加服务器上报以下错误,注意一下就行</p>
+</blockquote>
+<p><img src="http://qnpic.top/django_404%5C1.jpg" alt="img"></p>
+<blockquote>
+<p>以上的视图函数也是上面简单，就是返回一个页面，这里我就不多加阐述了，可以自己编写或者网上找个好看的，下面是我的404错误页面,喜欢的话，点点<a href="http://lightfish.cf/index.php?share/file&user=1&sid=hbJSRXVf" target="_blank" rel="noopener">这里</a>看看</p>
+</blockquote>
+<p><img src="http://qnpic.top/django_404%5C404.gif" alt="img"></p>
+<p><br><br><br>以上就是django项目上线部署的准备，So, Just have fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/07/Django-%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2%E5%87%86%E5%A4%87/" data-id="ck7ai040i00297u070paphvjv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/19/Webpack-%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Webpack 介绍和使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/05/Django-Celery%E6%A1%86%E6%9E%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Django Celery框架</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

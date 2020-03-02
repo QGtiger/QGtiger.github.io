@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>layer流加载实现博客首页 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="layer 流加载实现博客首页 最近也是清明节，节后也是借着写我的博客。这次我也是写博客的时候，发现博客首页用流加载可能浏览效果更加好，所以我今天我就简单的描述一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="layer流加载实现博客首页">
+<meta property="og:url" content="http://yoursite.com/2019/04/09/layer%E6%B5%81%E5%8A%A0%E8%BD%BD%E5%AE%9E%E7%8E%B0%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="layer 流加载实现博客首页 最近也是清明节，节后也是借着写我的博客。这次我也是写博客的时候，发现博客首页用流加载可能浏览效果更加好，所以我今天我就简单的描述一下。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qnpic.top/layer_flow%5CGIF.gif">
+<meta property="article:published_time" content="2019-04-09T14:08:44.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.960Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qnpic.top/layer_flow%5CGIF.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-layer流加载实现博客首页" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/layer%E6%B5%81%E5%8A%A0%E8%BD%BD%E5%AE%9E%E7%8E%B0%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5/" class="article-date">
+  <time datetime="2019-04-09T14:08:44.000Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      layer流加载实现博客首页
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="layer-流加载实现博客首页"><a href="#layer-流加载实现博客首页" class="headerlink" title="layer 流加载实现博客首页"></a>layer 流加载实现博客首页</h1><blockquote>
+<p>最近也是清明节，节后也是借着写我的博客。这次我也是写博客的时候，发现博客首页用流加载可能浏览效果更加好，所以我今天我就简单的描述一下。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h1 id="后端代码实现"><a href="#后端代码实现" class="headerlink" title="后端代码实现"></a>后端代码实现</h1><blockquote>
+<p>1.Django后端的实现也是先去路由进行配置，然后指向相应的视图函数，由于篇幅有限我这里就不多阐述，就展示下视图函数，如何发送数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from django.shortcuts import render,get_object_or_404,HttpResponse</span><br><span class="line">from django.core.paginator import EmptyPage,Paginator,PageNotAnInteger #分页功能所需函数的导入</span><br><span class="line">from .models import ArticlePost #这个就是博客文章的数据库models文件</span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def article_page(request):</span><br><span class="line">    article_titles &#x3D; ArticlePost.objects.all()</span><br><span class="line">    paginator &#x3D; Paginator(article_titles, 8)</span><br><span class="line">    page &#x3D; request.GET.get(&#39;page&#39;)</span><br><span class="line">    try:</span><br><span class="line">        current_page &#x3D; paginator.page(page)</span><br><span class="line">        articles &#x3D; current_page.object_list</span><br><span class="line">    except PageNotAnInteger:</span><br><span class="line">        current_page &#x3D; paginator.page(1)</span><br><span class="line">        articles &#x3D; current_page.object_list</span><br><span class="line">    except EmptyPage:</span><br><span class="line">        current_page &#x3D; paginator.page(paginator.num_pages)</span><br><span class="line">        articles &#x3D; current_page.object_list</span><br><span class="line">    print(len(articles))</span><br><span class="line">    articles_json &#x3D; []</span><br><span class="line">    for i in range(len(articles)):</span><br><span class="line">        articles_json.append(&#123;&#39;id&#39;:articles[i].id,&#39;author&#39;:articles[i].author.username,&#39;title&#39;:articles[i].title,&#39;updated&#39;:articles[i].updated.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;),&#39;body&#39;:articles[i].body[:70],&#39;users_like&#39;:articles[i].users_like.count()&#125;)</span><br><span class="line">    return HttpResponse(json.dumps(&#123;&#39;static&#39;:200,&#39;data&#39;:articles_json,&#39;page_num&#39;:paginator.num_pages&#125;))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>2.如上方法就想数据库取数据然后再传输数据，传输的数据然后前端再接收流加载出来</p>
+</blockquote>
+<h1 id="layer框架"><a href="#layer框架" class="headerlink" title="layer框架"></a>layer框架</h1><blockquote>
+<p>3.首先当然是引入该框架所需的js文件和css文件,引入如下文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;layer&#x2F;css&#x2F;layui.css&quot;&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;layer&#x2F;jquery-3.1.1.min.js&quot;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;layer&#x2F;layer.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;layer&#x2F;layui.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>4.这里是官方的文档以及一些我自己写的简单html文件，方便理解——<a href="https://www.lanzous.com/i3q09wf" target="_blank" rel="noopener">下载</a></p>
+</blockquote>
+<h1 id="前端代码实现"><a href="#前端代码实现" class="headerlink" title="前端代码实现"></a>前端代码实现</h1><blockquote>
+<p>5.上述也是简单引入了所需文件，下面也是说明下用法,</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id&#x3D;&quot;flow_demo&quot; &gt;&lt;&#x2F;ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">	layui.use([&#39;layer&#39;,&#39;flow&#39;],function()&#123;</span><br><span class="line">		var layer &#x3D; layui.layer;</span><br><span class="line">		var flow &#x3D; layui.flow;</span><br><span class="line"></span><br><span class="line">		flow.load(&#123;</span><br><span class="line">			elem: &quot;#flow_demo&quot;,</span><br><span class="line">			is_Auto:true,</span><br><span class="line">			end: &quot;emm,nothing next&quot;,</span><br><span class="line">			is_Lazyimg: true,</span><br><span class="line">			done: function(page,next)&#123;</span><br><span class="line">				var lis &#x3D; &#39;&#39;;</span><br><span class="line">				$.get(&#39;&#x2F;article&#x2F;article_page&#x2F;?page&#x3D;&#39;+page, function(e)&#123;</span><br><span class="line">				    parse_res &#x3D; JSON.parse(e)</span><br><span class="line">                    	res &#x3D; parse_res.data</span><br><span class="line">                    	page_num &#x3D; parse_res.page_num</span><br><span class="line">                    	console.log(res)</span><br><span class="line">				    for(var i &#x3D; 0; i &lt; res.length; i++)&#123;</span><br><span class="line"></span><br><span class="line">                        var item &#x3D; &#39;&lt;div class&#x3D;&quot;list-group&quot;&gt;&#39;+</span><br><span class="line">                            &#39;&lt;a href&#x3D;&quot;&#x2F;article&#x2F;article_content&#x2F;&#39;+res[i].id+&#39;&quot; class&#x3D;&quot;list-group-item active&quot;&gt;&#39;+</span><br><span class="line">                                &#39;&lt;h3 class&#x3D;&quot;list-group-item-heading&quot;&gt;&#39;+res[i].title+&#39;&lt;&#x2F;h3&gt;&#39;+</span><br><span class="line">                            &#39;&lt;&#x2F;a&gt;&#39;+</span><br><span class="line">                            &#39;&lt;p class&#x3D;&quot;list-group-item-text&quot;&gt;作者:&#39;+res[i].author+&#39;&lt;&#x2F;p&gt;&#39;+</span><br><span class="line">                            &#39;&lt;p class&#x3D;&quot;list-group-item-text&quot;&gt;概要:&#39;+res[i].body+&#39;&lt;&#x2F;p&gt;&#39;+</span><br><span class="line">                            &#39;&lt;p class&#x3D;&quot;meta&quot;&gt;&lt;span&gt;&lt;i class&#x3D;&quot;layui-icon layui-icon-praise&quot;&gt;&lt;&#x2F;i&gt; &#39;+res[i].users_like+&#39;&lt;&#x2F;span&gt;&#39;+</span><br><span class="line">                            &#39;&lt;span class&#x3D;&quot;update_time&quot;&gt;&#39;+res[i].updated+&#39;&lt;&#x2F;span&gt;&#39;+</span><br><span class="line">                            &#39;&lt;&#x2F;p&gt;&#39;+</span><br><span class="line">                        &#39;&lt;&#x2F;div&gt;&#39;;</span><br><span class="line"></span><br><span class="line">                        lis+&#x3D;item;</span><br><span class="line"></span><br><span class="line">				    &#125;</span><br><span class="line">				    next(lis,page&lt;page_num)</span><br><span class="line">				&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>6.关于详细的文档我这里推荐<a href="https://www.layui.com/doc/modules/flow.html" target="_blank" rel="noopener">官方文档</a>,简单来说也是done后添加get请求获取数据，搭建html然后next函数添加到网页后续</p>
+</blockquote>
+<blockquote>
+<p>7.实现动态图如下</p>
+</blockquote>
+<p><img src="http://qnpic.top/layer_flow%5CGIF.gif" alt="img"></p>
+<p><br><br><br>这次的layer的流加载也是简单的介绍一下，So<br><br>Just have fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/09/layer%E6%B5%81%E5%8A%A0%E8%BD%BD%E5%AE%9E%E7%8E%B0%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5/" data-id="ck7ai041p00417u07d0c1d3j3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/10/Windscribe-%E6%AF%8F%E6%9C%8830GB%E5%85%8D%E8%B4%B9%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Windscribe 免费科学上网
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/28/layer-js-web-%E5%BC%B9%E5%B1%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">layer.js web 弹层</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

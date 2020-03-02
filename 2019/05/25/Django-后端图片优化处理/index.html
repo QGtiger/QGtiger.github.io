@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Django 后端图片优化处理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Django 后端图片优化处理 在我的LightBlog博客上的头像上传前端是借用cropper——一款优秀的jquery插件，在之前的博客也是介绍过，可以去了解一下《cropper实现头像裁剪上传》.回归正题，我前端通过cropper上传裁剪好的图片到后端接收和保存，但是后端接收道德往往是较大的图片，如果不经过一定的压缩处理就会造成页面刷新速度慢和流量浪费等情况，所以我们可以在上传图片的时候生成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django 后端图片优化处理">
+<meta property="og:url" content="http://yoursite.com/2019/05/25/Django-%E5%90%8E%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Django 后端图片优化处理 在我的LightBlog博客上的头像上传前端是借用cropper——一款优秀的jquery插件，在之前的博客也是介绍过，可以去了解一下《cropper实现头像裁剪上传》.回归正题，我前端通过cropper上传裁剪好的图片到后端接收和保存，但是后端接收道德往往是较大的图片，如果不经过一定的压缩处理就会造成页面刷新速度慢和流量浪费等情况，所以我们可以在上传图片的时候生成">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qnpic.top/2019-05-25%5C1.jpg">
+<meta property="og:image" content="http://qnpic.top/2019-05-25%5C2.jpg">
+<meta property="og:image" content="http://qnpic.top/2019-05-25%5C3.jpg">
+<meta property="og:image" content="http://qnpic.top/2019-05-25%5CGIF.gif">
+<meta property="og:image" content="http://qnpic.top/2019-05-25%5CGIF2.gif">
+<meta property="og:image" content="http://qnpic.top/django-imagekit%5CGIF.gif">
+<meta property="article:published_time" content="2019-05-25T14:30:00.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.945Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qnpic.top/2019-05-25%5C1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Django-后端图片优化处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/25/Django-%E5%90%8E%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E5%A4%84%E7%90%86/" class="article-date">
+  <time datetime="2019-05-25T14:30:00.000Z" itemprop="datePublished">2019-05-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Django/">Django</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django 后端图片优化处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Django-后端图片优化处理"><a href="#Django-后端图片优化处理" class="headerlink" title="Django 后端图片优化处理"></a>Django 后端图片优化处理</h1><blockquote>
+<p>在我的LightBlog博客上的头像上传前端是借用cropper——一款优秀的jquery插件，在之前的博客也是介绍过，可以去了解一下<a href="/2019/03/28/cropper实现头像裁剪上传/">《cropper实现头像裁剪上传》</a>.回归正题，我前端通过cropper上传裁剪好的图片到后端接收和保存，但是后端接收道德往往是较大的图片，如果不经过一定的压缩处理就会造成页面刷新速度慢和流量浪费等情况，所以我们可以在上传图片的时候生成该图片的缩略图。一种方法可以是借助pillow这个图片处理库在接收后的视图函数中进行压缩和保存，这种简单易并且容易理解，所以这里就不介绍了。这里介绍的是第二种方法——django-imagekit第三方库</p>
+</blockquote>
+<a id="more"></a>
+
+<blockquote>
+<p>关于这个库的详细说明可以看<a href="https://django-imagekit.readthedocs.io/en/latest/" target="_blank" rel="noopener">官方文档</a>,这里就简单介绍下基本的用法和应用场景</p>
+</blockquote>
+<h2 id="安装依赖库"><a href="#安装依赖库" class="headerlink" title="安装依赖库"></a>安装依赖库</h2><blockquote>
+<p>1.要在Django中使用ImageField模块，需要安装pillow模块</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pillow</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>2.然后安装django-imagekit</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django-imagekit</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>3.完成上述步骤后就可以在django项目中的settings文件中进行配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS &#x3D; [</span><br><span class="line">	# ...</span><br><span class="line">    &#39;imagekit&#39;, # django-imagekit</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>4.现在准备工作全部完成，可以在项目中使用 django-imagekit 来处理图片了。</p>
+</blockquote>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><blockquote>
+<p>一个基本的应用场景就是在我用户上床头像的时候就生成缩略图，所以就在modles中进行配置：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from django.db import models</span><br><span class="line">from imagekit.models import ImageSpecField</span><br><span class="line">from imagekit.processors import ResizeToFill</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Create your models here.</span><br><span class="line">class UserInfo(models.Model):</span><br><span class="line">    photo &#x3D; models.ImageField(&#39; 头像 &#39;,upload_to&#x3D;&#39;avator&#39;, default&#x3D;&#39;default&#x2F;default.jpg&#39;)</span><br><span class="line"></span><br><span class="line">    # 注意：ImageSpecField不会生成数据库中的表</span><br><span class="line">    # 处理后的图片</span><br><span class="line">    photo_150x150 &#x3D; ImageSpecField(</span><br><span class="line">        source&#x3D;&quot;photo&quot;,</span><br><span class="line">        processors&#x3D;[ResizeToFill(30, 30)], # 处理后的图像大小</span><br><span class="line">        format&#x3D;&#39;JPEG&#39;,  # 处理后的图片格式</span><br><span class="line">        options&#x3D;&#123;&#39;quality&#39;: 95&#125; # 处理后的图片质量</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如上就设置好了，是不是很简单^-^.这个时候你就可以在前端页面使用模板标签,下面这个是获取缩略图的路径,150x150 其实就是命名，我这里其实是30x30的size</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img id&#x3D;&quot;avator&quot; src&#x3D;&quot;&#123;&#123; request.user.userinfo.photo_150x150.url &#125;&#125;&quot; class&#x3D;&quot;layui-nav-img avator&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/2019-05-25%5C1.jpg" alt="img"></p>
+<blockquote>
+<p>以上就是生成的地址链接，你也可以用下面的访问未压缩的图片</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;&#123;&#123; userinfo.photo.url &#125;&#125;&quot; class&#x3D;&quot;layui-circle&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当你看链接一点也是有点蒙，所以找目录的时候就看到了下面</p>
+</blockquote>
+<p><img src="http://qnpic.top/2019-05-25%5C2.jpg" alt="img"></p>
+<blockquote>
+<p><code>django-imagekit</code> 只是在media的目录下生成了 <code>CACHE</code>目录并指向该缩略图。该图片路径使用 <code>imagekit.cachefiles.namers.source_name_as_path</code> 来生成图片的路径。大体逻辑是，根据你设置的参数：processors,format,options进行pickle，把数据写到一个内存文件中，然后根据文件内容做一个md5，作为生成这个尺寸图片的名称。这么说比较抽象，还是举个例子：原图:/image/the5fire.png 生成图 /CACHE/images/the5fire/123dadwdniijonsd.jpg，这不是实际的生成结果，只是示例，最后的 <code>123xxxsd</code> 可以当做那个md5的值，当然前面的 <code>/CACHE/images/</code> 这样的路径也可以定制。以上就是为什么在该目录下生成，其实你是不用管的，下面就就来讲一下我再实践中遇到的问题和解决方法</p>
+</blockquote>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><blockquote>
+<p>我LightBlog的头像命名是以用户名加’.jpg’,这样就很简单的解决了头像的冲突，所以我在头像上传和保存那里有了一点卡顿</p>
+</blockquote>
+<ul>
+<li>1.首先我原本是通过以下方法来进行保存 ， 但是这样保存并不会使用imageField的save方法，所以也就没有使用到django-imagekit。所以我换了方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">uploadimg &#x3D; request.FILES.get(&#39;uploadimg&#39;, &#39;&#39;)</span><br><span class="line">      userinfo &#x3D; UserInfo.objects.get(user&#x3D;request.user)</span><br><span class="line">      fname &#x3D; &#39;&#123;&#125;&#x2F;&#123;&#125;&#39;.format(settings.MEDIA_ROOT, str(userinfo.photo))</span><br><span class="line">      try:</span><br><span class="line">          with open(fname, &#39;wb&#39;) as f:</span><br><span class="line">              for c in uploadimg.chunks():</span><br><span class="line">                  f.write(c)</span><br><span class="line">          return HttpResponse(json.dumps(&#123;&#39;status&#39;:200,&#39;tips&#39;:&#39;上传成功&#39;,&#39;photo&#39;:userinfo.photo.url&#125;))</span><br><span class="line">      except:</span><br><span class="line">          return HttpResponse(json.dumps(&#123;&#39;status&#39;:500,&#39;tips&#39;:&#39;上传失败&#39;&#125;))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2.使用了ImageField的save方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">uploadimg &#x3D; request.FILES.get(&#39;uploadimg&#39;, &#39;&#39;)</span><br><span class="line">      userinfo &#x3D; UserInfo.objects.get(user&#x3D;request.user)</span><br><span class="line">      avatorInfo &#x3D; str(userinfo.photo).split(&#39;&#x2F;&#39;)</span><br><span class="line">      if avatorInfo[0] &#x3D;&#x3D; &#39;default&#39;:</span><br><span class="line">          pass</span><br><span class="line">      else:</span><br><span class="line">          if avatorInfo[1] &#x3D;&#x3D; username+&#39;.jpg&#39;:</span><br><span class="line">              pass</span><br><span class="line">          else:</span><br><span class="line">              fname &#x3D; &#39;&#123;&#125;&#x2F;&#123;&#125;&#39;.format(settings.MEDIA_ROOT,str(userinfo.photo))</span><br><span class="line">              os.remove(fname)</span><br><span class="line">      try:</span><br><span class="line">          userinfo.photo.save(username + &#39;.jpg&#39;, uploadimg)</span><br><span class="line">          return HttpResponse(json.dumps(&#123;&#39;status&#39;:200,&#39;tips&#39;:&#39;上传成功&#39;,&#39;photo&#39;:userinfo.photo.url&#125;))</span><br><span class="line">      except:</span><br><span class="line">          return HttpResponse(json.dumps(&#123;&#39;status&#39;:500,&#39;tips&#39;:&#39;上传失败&#39;&#125;))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但是上面的这种方法确实实现缩略图，但是当你第二次上了的时候并不会覆盖前一个图片而是创建了另一个,如果一直一样下去，肯定会浪费服务器储存空间，所以我又想了一计</p>
+</blockquote>
+<p><img src="http://qnpic.top/2019-05-25%5C3.jpg" alt="img"></p>
+<ul>
+<li>第二次上传的时候，先删除前一个的头像图片在保存我上传的图片，(嘿嘿，美的很)。然而django-imagekit反手就是给我一个’巴掌’,并不行,下面gif可以看到，第二次上传并没有生成缩略图。</li>
+</ul>
+<p><img src="http://qnpic.top/2019-05-25%5CGIF.gif" alt="img"></p>
+<ul>
+<li>经过上面的两次错误，我也是大概了解到了django-imagekit这个模块的工作流程应该是到正常触发ImageField 的save函数(即数据库中的值发生变化)才会生成缩略图，因为第二次的时候其实数据库中的值并没有发生变化都是一样的。所以应该是数据库中的该值发生变化才会触发。所以经过我一定时间的考虑，我写出了下面代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@login_required(login_url&#x3D;&#39;&#x2F;account&#x2F;login&#x2F;&#39;)</span><br><span class="line">@csrf_exempt</span><br><span class="line">def my_image(request):</span><br><span class="line">    username &#x3D; request.user.username</span><br><span class="line">    if request.method &#x3D;&#x3D; &#39;POST&#39;:</span><br><span class="line">        uploadimg &#x3D; request.FILES.get(&#39;uploadimg&#39;, &#39;&#39;)</span><br><span class="line">        userinfo &#x3D; UserInfo.objects.get(user&#x3D;request.user)</span><br><span class="line">        avatorInfo &#x3D; str(userinfo.photo).split(&#39;&#x2F;&#39;)</span><br><span class="line">        if avatorInfo[0] &#x3D;&#x3D; &#39;default&#39;:</span><br><span class="line">            pass</span><br><span class="line">        else:</span><br><span class="line">            if avatorInfo[1] &#x3D;&#x3D; username+&#39;.jpg&#39;:</span><br><span class="line">                pass</span><br><span class="line">            else:</span><br><span class="line">                fname &#x3D; &#39;&#123;&#125;&#x2F;&#123;&#125;&#39;.format(settings.MEDIA_ROOT,str(userinfo.photo))</span><br><span class="line">                os.remove(fname)</span><br><span class="line">        try:</span><br><span class="line">            userinfo.photo.save(username + &#39;.jpg&#39;, uploadimg)</span><br><span class="line">            return HttpResponse(json.dumps(&#123;&#39;status&#39;:200,&#39;tips&#39;:&#39;上传成功&#39;,&#39;photo&#39;:userinfo.photo.url&#125;))</span><br><span class="line">        except:</span><br><span class="line">            return HttpResponse(json.dumps(&#123;&#39;status&#39;:500,&#39;tips&#39;:&#39;上传失败&#39;&#125;))</span><br><span class="line">    else:</span><br><span class="line">        return HttpResponse(&quot;该页面摸得GET&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>该方法下，一个用户，会有两张图片，一张是第一次上传的，一张就是后面上传的，这样的话就一定层面上减少了服务器储存空间的浪费。(emmm,主要我现在可能对该方法底层的一些触发并不是很了解，sry~~)</p>
+</blockquote>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://qnpic.top/2019-05-25%5CGIF2.gif" alt="img"></p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><blockquote>
+<p>有点憨了，没有好好浏览官方文档(也不能太怪我，咱英语差也不敢问,也不敢说).这次我也是去试了下，发现可以完全替代django自带models里的ImageField.使用代码也是很简单基本和我介绍的一样，只是自己憨,代码如下，只需要修改models文件就行了(当然记得<code>makemigrations</code>和<code>migrate</code>)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class UserInfo(models.Model):</span><br><span class="line">    #...</span><br><span class="line">    photo &#x3D; ProcessedImageField(</span><br><span class="line">        upload_to&#x3D;&#39;avator&#39;,</span><br><span class="line">        processors&#x3D;[ResizeToFill(400, 400)],</span><br><span class="line">        format&#x3D;&#39;JPEG&#39;,</span><br><span class="line">        options&#x3D;&#123;&#39;quality&#39;:98&#125;, verbose_name&#x3D;&#39;展示图片&#39;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上这样就实现了上传图片后的裁剪，这样的好处这直接，我用ImageField 保存的图片大小至少几百kb而如上配置完了不到50kb。gif效果图如下</p>
+</blockquote>
+<p><img src="http://qnpic.top/django-imagekit%5CGIF.gif" alt="img"></p>
+<p><br><br><br>这次也是简单介绍了<code>Django-imagekit</code>的用法，So<br><br>Just have fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/25/Django-%E5%90%8E%E7%AB%AF%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96%E5%A4%84%E7%90%86/" data-id="ck7ai040g00257u07ao9kden1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/27/Django-%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Django 请求拦截器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/24/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前后端分离</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

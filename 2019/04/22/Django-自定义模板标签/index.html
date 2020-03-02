@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Django 自定义模板标签 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自定义模板标签 在Django中模板中的for和if就是默认的模板标签，为了更为复杂的操作，Django还允许开发自定义的模板标签，共有三种自定义模板标签，如simple_tag、inclusion_tag和assignment_tag。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django 自定义模板标签">
+<meta property="og:url" content="http://yoursite.com/2019/04/22/Django-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="自定义模板标签 在Django中模板中的for和if就是默认的模板标签，为了更为复杂的操作，Django还允许开发自定义的模板标签，共有三种自定义模板标签，如simple_tag、inclusion_tag和assignment_tag。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://qnpic.top/django_tags%5C1.jpg">
+<meta property="og:image" content="http://qnpic.top/django_tags%5C2.jpg">
+<meta property="og:image" content="http://qnpic.top/django_tags%5C3.jpg">
+<meta property="og:image" content="http://qnpic.top/django_tags%5C4.jpg">
+<meta property="og:image" content="http://qnpic.top/django_tags%5C5.jpg">
+<meta property="article:published_time" content="2019-04-22T09:42:07.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.945Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qnpic.top/django_tags%5C1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Django-自定义模板标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/22/Django-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/" class="article-date">
+  <time datetime="2019-04-22T09:42:07.000Z" itemprop="datePublished">2019-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django 自定义模板标签
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自定义模板标签"><a href="#自定义模板标签" class="headerlink" title="自定义模板标签"></a>自定义模板标签</h1><blockquote>
+<p>在Django中模板中的for和if就是默认的模板标签，为了更为复杂的操作，Django还允许开发自定义的模板标签，共有三种自定义模板标签，如simple_tag、inclusion_tag和assignment_tag。</p>
+</blockquote>
+<a id="more"></a>
+
+<blockquote>
+<p>下面我会用我再LightBlog的实例来简单讲解一下</p>
+</blockquote>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
+<p>首先你需要在你的项目setting.py文件中注册的app目录下，创建<font  style="color:red"><b>templatetags</b></font>文件夹，这个目录名称是Django默认的，必须使用这个名称。然后在该目录下创建<code>__init__.py</code>和你要写模板标签的py文件，比如我这里就是<code>article_tags.py</code>.</p>
+</blockquote>
+<p><img src="http://qnpic.top/django_tags%5C1.jpg" alt="img"></p>
+<h2 id="自定义模板标签显示文章总数"><a href="#自定义模板标签显示文章总数" class="headerlink" title="自定义模板标签显示文章总数"></a>自定义模板标签显示文章总数</h2><blockquote>
+<p>编辑模板标签文件<code>article_tags.py</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django import template</span><br><span class="line"></span><br><span class="line">register &#x3D; template.Library()</span><br><span class="line">from article.models import ArticlePost</span><br><span class="line"></span><br><span class="line">@register.simple_tag</span><br><span class="line">def total_articles():</span><br><span class="line">    return ArticlePost.objects.count()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>然后现在你要使用该模板标签的html文件中先引入</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load article_tags %&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>然后就可以使用啦</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;base.html&quot; %&#125;</span><br><span class="line">&#123;% load article_tags %&#125;</span><br><span class="line">&#123;% block title %&#125; 博客首页 &#123;% endblock %&#125;</span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;丰富头脑，善化行为&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;p&gt;There are &#123;% total_articles %&#125;  articles which you can read.&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://qnpic.top/django_tags%5C2.jpg" alt="img"></p>
+<h2 id="使用自定义模板显示用户的文章总数"><a href="#使用自定义模板显示用户的文章总数" class="headerlink" title="使用自定义模板显示用户的文章总数"></a>使用自定义模板显示用户的文章总数</h2><blockquote>
+<p>首先依旧先在<code>article_tags.py</code>文件中编写函数,这里是参数的使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django import template</span><br><span class="line"></span><br><span class="line">register &#x3D; template.Library()</span><br><span class="line">from article.models import ArticlePost</span><br><span class="line"></span><br><span class="line">@register.simple_tag</span><br><span class="line">def author_total_articles(user):</span><br><span class="line">    return user.article_post.count()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>然后就可以在想使用该模板标签的html文件中引入在使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;base.html&quot; %&#125;</span><br><span class="line">&#123;% load article_tags %&#125;</span><br><span class="line">    &lt;h3 style&#x3D;&quot;text-align:center&quot;&gt;共发表&#123;% author_total_articles user %&#125;篇文章&lt;&#x2F;h3&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>先 <code>load article_tags</code> 引入后就可以使用，记得加参数，这里的user其实就是后端传过来的数据库对象</p>
+</blockquote>
+<p><img src="http://qnpic.top/django_tags%5C3.jpg" alt="img"></p>
+<h2 id="自定义模板显示最新文章"><a href="#自定义模板显示最新文章" class="headerlink" title="自定义模板显示最新文章"></a>自定义模板显示最新文章</h2><blockquote>
+<p>这里的话就介绍<code>inclusion_tag</code>的使用,依旧先在<code>article_tags.py</code>文件中加入以下代码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from django import template</span><br><span class="line"></span><br><span class="line">register &#x3D; template.Library()</span><br><span class="line">from article.models import ArticlePost</span><br><span class="line"></span><br><span class="line">@register.inclusion_tag(&#39;article&#x2F;list&#x2F;latest_articles.html&#39;)</span><br><span class="line">def latest_articles(n&#x3D;5):</span><br><span class="line">    latest_articles &#x3D; ArticlePost.objects.order_by(&#39;-created&#39;)[:n]</span><br><span class="line">    return &#123;&quot;latest_articles&quot;: latest_articles&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>article/list/latest_articles.html</code> 的html代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &#123;% for article in latest_articles %&#125;</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;&#123;% url &#39;article:article_content&#39; article.id %&#125;&quot;&gt;&#123;&#123; forloop.counter &#125;&#125;.&#123;&#123; article.title &#125;&#125;&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">    &#123;% empty %&#125;</span><br><span class="line">    &lt;p&gt;nothing..&lt;&#x2F;p&gt;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里的话相当于使用<code>article/list/latest_articles.html</code>这个template，然后传入数据渲染html页面，然后这个渲染后的页面，最终被主html页面引用，引用方法如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3 style&#x3D;&quot;text-align:center&quot;&gt;最新文章&lt;&#x2F;h3&gt;</span><br><span class="line">            &#123;% latest_articles 4 %&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>latest_article 4</code>就完成了引用，返回的也是html页面，最终显示页面</p>
+</blockquote>
+<p><img src="http://qnpic.top/django_tags%5C4.jpg" alt="img"></p>
+<h2 id="使用自定义模板标签显示评论最多文章"><a href="#使用自定义模板标签显示评论最多文章" class="headerlink" title="使用自定义模板标签显示评论最多文章"></a>使用自定义模板标签显示评论最多文章</h2><blockquote>
+<p>这里的话也是一样先在<code>article_tags.py</code>文件中定义标签，当然这里主要也是为了介绍django 数据聚合函数 <code>ANNOTATE</code>,这里的话，我推荐这篇<a href="https://www.cnblogs.com/wumingxiaoyao/p/7065471.html" target="_blank" rel="noopener">博客</a>先了解一下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from django import template</span><br><span class="line">from django.db.models import Count </span><br><span class="line"></span><br><span class="line">register &#x3D; template.Library()</span><br><span class="line">from article.models import ArticlePost</span><br><span class="line"></span><br><span class="line">@register.simple_tag</span><br><span class="line">def most_commented_articles(n&#x3D;5):</span><br><span class="line">    return ArticlePost.objects.annotate(total_comments&#x3D;Count(&#39;comments&#39;)).order_by(&#39;-total_comments&#39;)[:n]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里的<code>total_comments=Count(&#39;comments&#39;)</code>里的comments就是通过Foreign关联的，如models.py文件的关联代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from django.db import models</span><br><span class="line">class Comment(models.Model):</span><br><span class="line">    article &#x3D; models.ForeignKey(ArticlePost, on_delete&#x3D;models.CASCADE, related_name&#x3D;&quot;comments&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>就是这里的related_name=”comments”来进行关联，关联后赋值给total_comments给后面进行筛选和取值，返回的是数据库对象，然后在html模板文件中使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load article_tag %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% most_commented_articles as articles %&#125;</span><br><span class="line">            &lt;ul&gt;</span><br><span class="line">                &#123;% for article in articles %&#125;</span><br><span class="line">                &lt;li&gt;</span><br><span class="line">                    &lt;a href&#x3D;&quot;&#123;% url &#39;article:article_content&#39; article.id %&#125;&quot;&gt;&#123;&#123; forloop.counter &#125;&#125;.&#123;&#123; article.title &#125;&#125;&lt;&#x2F;a&gt;</span><br><span class="line">                &lt;&#x2F;li&gt;</span><br><span class="line">                &#123;% endfor %&#125;</span><br><span class="line">            &lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>最后渲染界面如下</p>
+</blockquote>
+<p><img src="http://qnpic.top/django_tags%5C5.jpg" alt="img"></p>
+<p><br><br><br>这次的博客也是简单介绍了simpla_tag和inclusion_tag的用法，记得先<code>register = template.Library()</code>哦，So，<br><br>Just have fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/22/Django-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/" data-id="ck7ai040o002i7u073evidtih" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/05/Django-Celery%E6%A1%86%E6%9E%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Django Celery框架
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/14/Python-%E6%93%8D%E4%BD%9Credis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python 操作redis</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

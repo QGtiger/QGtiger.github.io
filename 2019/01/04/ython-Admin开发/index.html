@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python Admin开发 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Django Admin后台管理 Admin后台系统也称为网站后台管理系统，主要用于对网站前台的信息进行管理，如文字、图片、影音和其他日常使用文件的发布、更新、删除操作，也包括功能信息的统计和管理，如用户信息、订单信息和访客信息等。简单来说，就是对网站数据库和文件等快速操作和管理系统，以使网页内容能够及时得到更新和调整。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Admin开发">
+<meta property="og:url" content="http://yoursite.com/2019/01/04/ython-Admin%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Django Admin后台管理 Admin后台系统也称为网站后台管理系统，主要用于对网站前台的信息进行管理，如文字、图片、影音和其他日常使用文件的发布、更新、删除操作，也包括功能信息的统计和管理，如用户信息、订单信息和访客信息等。简单来说，就是对网站数据库和文件等快速操作和管理系统，以使网页内容能够及时得到更新和调整。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-04T06:17:00.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.962Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ython-Admin开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/04/ython-Admin%E5%BC%80%E5%8F%91/" class="article-date">
+  <time datetime="2019-01-04T06:17:00.000Z" itemprop="datePublished">2019-01-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python Admin开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Django-Admin后台管理"><a href="#Django-Admin后台管理" class="headerlink" title="Django Admin后台管理"></a>Django Admin后台管理</h1><blockquote>
+<p>Admin后台系统也称为网站后台管理系统，主要用于对网站前台的信息进行管理，如文字、图片、影音和其他日常使用文件的发布、更新、删除操作，也包括功能信息的统计和管理，如用户信息、订单信息和访客信息等。简单来说，就是对网站数据库和文件等快速操作和管理系统，以使网页内容能够及时得到更新和调整。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="创建超级用户"><a href="#创建超级用户" class="headerlink" title="创建超级用户"></a>创建超级用户</h2><blockquote>
+<p><code>python manage.py createsuperuser</code>,这就是创建超级用户的代码，用户名和邮箱可以为空，如果用户名为空，默认使用计算机的用户名。输入的密码不会显示在计算机屏幕上。</p>
+</blockquote>
+<h2 id="模型展示Admin后台"><a href="#模型展示Admin后台" class="headerlink" title="模型展示Admin后台"></a>模型展示Admin后台</h2><blockquote>
+<p>要想将Django的App下所定义模型对应的数据库数据展示在Django Admin后台，需要在所在App下的<code>admin.py</code>文件添加如下方法：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib import admin</span><br><span class="line">from .models import *</span><br><span class="line"></span><br><span class="line"># Admin后台的title和header</span><br><span class="line">admin.site.site_title &#x3D; &#39;Mydjango后台管理&#39;</span><br><span class="line">admin.site.site_header &#x3D; &#39;MyDjango&#39;</span><br><span class="line"></span><br><span class="line"># 方法一。将模型直接注册岛admin后台</span><br><span class="line">admin.site.register(Product)  # 这里的Product就是models里创建的模型</span><br><span class="line"></span><br><span class="line"># 方法二   </span><br><span class="line"># 自定义ProductAdmin类并继承ModelAdmin</span><br><span class="line"># 注册方法一，使用Python装饰器将ProductAdmin和模型Product绑定并注册到后台</span><br><span class="line">@admin.register(Product)</span><br><span class="line">class ProductAdmin(admin.ModelAdmin):</span><br><span class="line">    # 设置显示的字段,列表里都是你创建的模型里的字段</span><br><span class="line">    list_display &#x3D; [‘id’, ‘name’, ‘weight’, ‘type’]</span><br><span class="line"></span><br><span class="line"># 注册方法二</span><br><span class="line"># admin.site.register(Product,ProductAdmin)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>日常的开发中都是使用第二种方法。</p>
+</blockquote>
+<h2 id="Admin的基本设置"><a href="#Admin的基本设置" class="headerlink" title="Admin的基本设置"></a>Admin的基本设置</h2><h3 id="App在admin中的中文显示"><a href="#App在admin中的中文显示" class="headerlink" title="App在admin中的中文显示"></a>App在admin中的中文显示</h3><blockquote>
+<p>上述的方法将App下的模型注册到了Admin后台。但是在Admin后台显示的模型为英文，这里就可以进一步的设置。首先就是实现App的中文显示。主要有App的<code>__init__.py</code>文件实现。实现代码如下(例如这里的App为index)：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from django.apps import AppConfig</span><br><span class="line">Import os</span><br><span class="line"># 修改App在admin后台显示的名称</span><br><span class="line"># default_app_config的值来自 apps.py的类名</span><br><span class="line">default_app_config &#x3D; ‘index.IndexConfig’</span><br><span class="line"></span><br><span class="line"># 获取当前App的命名</span><br><span class="line">def get_current_app_name(_file):</span><br><span class="line">    return os.path.split(os.path.dirname(_file))[-1]</span><br><span class="line">    </span><br><span class="line"># 重写类 IndexConfig</span><br><span class="line">class IndexConfig(AppConfig):</span><br><span class="line">    name &#x3D; get_current_app_name(__file__)</span><br><span class="line">    verbose_name &#x3D; &#39; 网站首页 &#39;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当项目启动后，程序就会从初识文件<strong>init</strong>获取重写的<code>IndexConfig</code>类，类属性 <code>verbose_name</code> 用于设置index的中文内容。</p>
+</blockquote>
+<h3 id="模型中的字段在admin后台的中文显示"><a href="#模型中的字段在admin后台的中文显示" class="headerlink" title="模型中的字段在admin后台的中文显示"></a>模型中的字段在admin后台的中文显示</h3><blockquote>
+<p>在models.py中设置类Meta的类属性<code>verbose_name_plural</code> 即可实现。显示代码如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Product模型 设置中文，代码编写在models.py文件中</span><br><span class="line"># 例如下</span><br><span class="line">from django.db import models</span><br><span class="line">class Product(models.Model):</span><br><span class="line">    id &#x3D; models.AutoField(‘.序号 ’, primary_key&#x3D;True)</span><br><span class="line">    name &#x3D; models.CharField(‘.名称 ’, max_length&#x3D;50)</span><br><span class="line">    weight &#x3D; models.CharField(‘.重量 ’, max_length&#x3D;20)</span><br><span class="line">    type &#x3D; models.ForeighKey(Type, on_delete&#x3D;models.CASCADE, verbose_name&#x3D;‘ 产品类型 ’)</span><br><span class="line">    # 设置返回值</span><br><span class="line">    def __str__(self):</span><br><span class="line">        return self.name</span><br><span class="line">    class Meta:</span><br><span class="line">        # 如果只设置verbose_name，在Admin中会显示“产品信息 s”</span><br><span class="line">        verbose_name &#x3D; ‘ 产品信息 ’</span><br><span class="line">        verbose_name_plural &#x3D; ‘ 产品信息 ’</span><br></pre></td></tr></table></figure>
+
+<h2 id="Admin后台的二次优化"><a href="#Admin后台的二次优化" class="headerlink" title="Admin后台的二次优化"></a>Admin后台的二次优化</h2><blockquote>
+<p>在一个数据中存放了成千上万的数据，这个时候就需要对我们的Django后台进行适当的优化，代码如下(在admin.py文件中进行优化)：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># admin.py</span><br><span class="line"></span><br><span class="line">from django.contrib import admin</span><br><span class="line">from .models import *</span><br><span class="line"></span><br><span class="line"># Admin后台的title和header</span><br><span class="line">admin.site.site_title&#x3D;‘Mydjango后台管理’</span><br><span class="line">admin.site.site_header&#x3D;‘MyDjango’</span><br><span class="line"></span><br><span class="line">@admin.register(Product)</span><br><span class="line">class ProductAdmin(admin.ModelAdmin):</span><br><span class="line">    # 设置显示的字段,列表里都是你创建的模型里的字段</span><br><span class="line">    list_display &#x3D; [‘id’, ‘name’, ‘weight’, ‘type’]</span><br><span class="line">    # 设置可搜索的字段并在Admin后台数据生成搜索框，如外键，应使用双下划线连接两个模型的字段</span><br><span class="line">    search_fields &#x3D; [‘id’, ‘name’, ‘type__type_name’]</span><br><span class="line">    # 设置过滤器，在后台数据的右侧生成导航栏，如有外键，因使用双下划线连接两个模型的字段</span><br><span class="line">    list_filter &#x3D; [‘name’, ‘type__type_name’]</span><br><span class="line">    # 设置排序方式，[‘id’]为升序，‘-id’为降序</span><br><span class="line">    ordering &#x3D; [‘id’]</span><br><span class="line">    # 添加新的数据时，设置可添加数据的字段</span><br><span class="line">    fields &#x3D; [‘name’, ’weight’, ’type’]</span><br><span class="line">    # 设置可读字段，在修改和新增数据时使其无法设置</span><br><span class="line">    readonly_fields &#x3D; [‘name’]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述代码中，ProductAdmin类分别设置了<code>list_display</code>, <code>search_fields</code>, <code>list_filter</code>, <code>ordering</code>, <code>fields</code>, <code>readonly_fields</code>,每个都有注明方法。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/04/ython-Admin%E5%BC%80%E5%8F%91/" data-id="ck7ai043e006z7u074drn4nyc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/06/%E4%B8%8A%E7%BD%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          科学上网
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/04/thon%E5%AE%9E%E7%8E%B0%E5%85%8D%E8%B4%B9%E5%8F%91%E7%9F%AD%E4%BF%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python实现免费发短信</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

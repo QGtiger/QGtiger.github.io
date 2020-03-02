@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>MongoDB数据库基本操作 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MongoDB的操作1.连接MongoDB Python 想要连接MongoDB需要安装pymongo，emm，安装方法可以在cmd下，pip安装(pip install pymongo)安装完了后你就可以用一下代码连接MongoDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB数据库基本操作">
+<meta property="og:url" content="http://yoursite.com/2018/12/07/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MongoDB的操作1.连接MongoDB Python 想要连接MongoDB需要安装pymongo，emm，安装方法可以在cmd下，pip安装(pip install pymongo)安装完了后你就可以用一下代码连接MongoDB">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxqlkdgrj30tr0drtcv.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxqlo9zej314809tq5e.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxqlv74vj30v309r765.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxta6g26j30v809nmyz.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxta9ry4j30o006j0te.jpg">
+<meta property="article:published_time" content="2018-12-07T09:11:04.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.949Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxqlkdgrj30tr0drtcv.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-MongoDB数据库基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/07/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time datetime="2018-12-07T09:11:04.000Z" itemprop="datePublished">2018-12-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MongoDB数据库基本操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MongoDB的操作"><a href="#MongoDB的操作" class="headerlink" title="MongoDB的操作"></a>MongoDB的操作</h1><h4 id="1-连接MongoDB"><a href="#1-连接MongoDB" class="headerlink" title="1.连接MongoDB"></a>1.连接MongoDB</h4><blockquote>
+<p>Python 想要连接MongoDB需要安装pymongo，emm，安装方法可以在cmd下，pip安装(<code>pip install pymongo</code>)<br>安装完了后你就可以用一下代码连接MongoDB</p>
+</blockquote>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line">client &#x3D; pymongo.MongoClient(host&#x3D;&#39;localhost&#39;,port&#x3D;&#39;27017&#39;) #默认端口27017</span><br><span class="line">db &#x3D; client[&#39;mydb&#39;] #指定mydb这个数据库，如果没有会自动创建</span><br><span class="line">collection &#x3D; db[&#39;students&#39;]  #指定students这个集合，如果没有会自动创建一个</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxqlkdgrj30tr0drtcv.jpg" alt="img"></p>
+<h4 id="2-MongoDB数据库，数据的插入"><a href="#2-MongoDB数据库，数据的插入" class="headerlink" title="2.MongoDB数据库，数据的插入"></a>2.MongoDB数据库，数据的插入</h4><blockquote>
+<p>插入数据，注意是已字典的形式。比如插入以下数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">student&#x3D;&#123;</span><br><span class="line">  &#39;id&#39;:20180101,</span><br><span class="line">  &#39;name&#39;:&#39;Jack&#39;,</span><br><span class="line">  &#39;age&#39;:18,</span><br><span class="line">  &#39;gender&#39;:&#39;male&#39;</span><br><span class="line">&#125;</span><br><span class="line">用 collection.insert(student)</span><br></pre></td></tr></table></figure>
+<p>如下图<br><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxqlo9zej314809tq5e.jpg" alt="img"></p>
+<blockquote>
+<p>最新官方推荐<code>insert_one()</code>插入一条数据，返回的不同，是InsertOneResult对象<br>在MongoDB中都有一个_id属性来唯一标识，如果没有就会自动产生一个ObjectId类型的_id属性，返回_id值<br>当然也可以一次性插入多条数据  最新官方推荐 <code>insert_many()</code>来插入多条数据,或者依旧用<code>insert</code>,<code>collection.insert([student1,student2])</code>,注意是列表形式。</p>
+</blockquote>
+<h4 id="3-MongoDB数据库的查询"><a href="#3-MongoDB数据库的查询" class="headerlink" title="3.MongoDB数据库的查询"></a>3.MongoDB数据库的查询</h4><blockquote>
+<p>我们可以用<code>find_one()</code>或者<code>find()</code>方法来进行查询，find()返回一个生成器对象</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; collection.find_one(&#123;&#39;name&#39;:&#39;Mike&#39;&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>返回的是<code>字典类型</code>  查询不存在时，则会返回<code>none</code> 记住哦： 是字典类型<br>比如你想查询age等于20的若干数据，你会用什么呢</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find(&#123;&#39;age&#39;:20&#125;)</span><br><span class="line">for result in results:</span><br><span class="line">  print(result)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查询大于20呢</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find(&#123;&#39;age&#39;:&#123;&#39;$gt&#39;: 20&#125;&#125;)</span><br><span class="line">for result in results:</span><br><span class="line">  print(result)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里查询的条件键值已经不是单纯的数字，而是一个字典，比较符号<code>$gt</code> 大于<br>下面是这些比较符号的总结</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含 义</th>
+<th>实 例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$gt</td>
+<td>大于</td>
+<td>{‘age’:{‘$gt’:20}}</td>
+</tr>
+<tr>
+<td>$lt</td>
+<td>小于</td>
+<td>{‘age’:{‘$lt’:20}}</td>
+</tr>
+<tr>
+<td>$gte</td>
+<td>&gt;=</td>
+<td>{‘age’:{‘$gte’:20}}</td>
+</tr>
+<tr>
+<td>$lte</td>
+<td>&lt;=</td>
+<td>{‘age’:{‘$lte’:20}}</td>
+</tr>
+<tr>
+<td>$ne</td>
+<td>!=</td>
+<td>{‘age’:{‘$ne’:20}}</td>
+</tr>
+<tr>
+<td>$in</td>
+<td>在范围内</td>
+<td>{‘age’:{‘$in’:[20,23]}}</td>
+</tr>
+<tr>
+<td>$nin</td>
+<td>不在范围内</td>
+<td>{‘age’:{‘$nin’:[20,23]}}</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>还支持正则表达式，如查询以’M’开头名字的数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find(&#123;&#39;name&#39;:&#123;&#39;$regex&#39;:&#39;^M.*&#39;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>还有简单的功能符号</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$exists   属性是否存在    &#123;&#39;name&#39;:&#123;&#39;$exists&#39;:True&#125;&#125;   name属性存在</span><br><span class="line">$where    高级条件查询    &#123;&#39;$where&#39;:&#39;obj.fans_counts &#x3D;&#x3D; obj.follows_counts&#39;&#125;   自身粉丝数等于关注数</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-计数"><a href="#4-计数" class="headerlink" title="4.计数"></a>4.计数</h4><ul>
+<li><p>要统计查询结果有多少条数据，可以用<code>count()</code>方法，比如统计有多少数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count &#x3D; collection.find().count()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>或者统计符合某种条件的数据数,例如统计名字以a开头的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count &#x3D; collection.find(&#123;&#39;name&#39;:&#123;&#39;$regex&#39;:&#39;^a.*&#39;&#125;&#125;).count()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="5-排序"><a href="#5-排序" class="headerlink" title="5.排序"></a>5.排序</h4><blockquote>
+<p>排序，直接调用<code>sort()</code>方法，并在其中传入排序的字段以及升降标志<br><code>pymongo.ASCENDING</code> 升序  <code>pymongo.DESCENDING</code>  降序</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results  &#x3D; collection.find().sort(&#39;name&#39;,pymongo.ASCENDING)</span><br><span class="line">print(result[&#39;name&#39;] for result in results)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-偏移"><a href="#6-偏移" class="headerlink" title="6.偏移"></a>6.偏移</h4><blockquote>
+<p>在某些情况，我们只需要提取其中的几个元素，我就可以调用<code>skip()</code>方法，示例如下:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find().sort(&#39;name&#39;,pymongo.DESCENDING).skip(2)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这样我们就可以跳过前两个<br>另外，我们还可以用<code>limit()</code>方法来指定要去的个数,只取两个数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find(&#123;&#39;age&#39;:&#123;&#39;$gt&#39;:20&#125;&#125;).sort(&#39;name&#39;,pymongo.ASCENDING).skip(2).limit(2)</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-数据的更新"><a href="#7-数据的更新" class="headerlink" title="7.数据的更新"></a>7.数据的更新</h4><blockquote>
+<p>对于数据的更新，我们可以用<code>upodate()</code>方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">condition&#x3D;&#123;&#39;name&#39;:&#39;Mike&#39;&#125;</span><br><span class="line">student &#x3D; collection.find_one(condition)</span><br><span class="line">student[&#39;age&#39;] &#x3D; 25</span><br><span class="line">result &#x3D; collection.update(condition,student) #update()方法是将原条件和修改后的数据传入</span><br><span class="line">print(result)  #返回的是字典类型</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxqlv74vj30v309r765.jpg" alt="img"></p>
+<blockquote>
+<p>官方推荐 <code>update_one()</code>但是如果使用<code>update_one()</code>方法，第二个参数就不能传入字典，应该用<code>$</code>类型操作符作为字典的键名,示例如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; collection.update_one(condition,&#123;&#39;$set&#39;:student&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxta6g26j30v809nmyz.jpg" alt="img"></p>
+<h4 id="8-数据的删除"><a href="#8-数据的删除" class="headerlink" title="8.数据的删除"></a>8.数据的删除</h4><blockquote>
+<p>删除的话，可以直接用<code>remove()</code>方法，符合条件的数据全部删除<br>这里依然推荐两个官方推荐方法  <code>delete_one()</code>和 <code>elete_many()</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.delete_many(&#123;&#39;age&#39;:&#123;&#39;$gt&#39;:20&#125;&#125;)</span><br><span class="line">print(results)  #返回的字典形式</span><br><span class="line">print(results.deleted_count)  #删除的个数</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxta9ry4j30o006j0te.jpg" alt="img"><br>此时也只有一条数据</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/07/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" data-id="ck7ai041w004b7u07bxgw127k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/07/MySql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySql数据库操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/06/ongoDB%E6%95%B0%E6%8D%AE%E5%BA%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MongoDB数据库</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

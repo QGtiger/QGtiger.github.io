@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>MySql数据库操作 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MySql数据库的基本操作 MySql是关系型数据，关系型数据库是基于关系模型的数据库，而关系模型是通过二维表来保存的，所以它的存储方式就是行列组成的表，每一列是一个字段，每一行是一条记录。在Python2中连接MySql的库大多是MySQLdb，但是这个库在Python3中不在支持，所以这里我推荐是PyMySQL。相信PyMySQL的安装大家都懂，只需要pip install pymysql下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql数据库操作">
+<meta property="og:url" content="http://yoursite.com/2018/12/07/MySql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MySql数据库的基本操作 MySql是关系型数据，关系型数据库是基于关系模型的数据库，而关系模型是通过二维表来保存的，所以它的存储方式就是行列组成的表，每一列是一个字段，每一行是一条记录。在Python2中连接MySql的库大多是MySQLdb，但是这个库在Python3中不在支持，所以这里我推荐是PyMySQL。相信PyMySQL的安装大家都懂，只需要pip install pymysql下载">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxpx0ffqj30r10iq42f.jpg">
+<meta property="article:published_time" content="2018-12-07T10:04:11.000Z">
+<meta property="article:modified_time" content="2020-03-02T11:37:49.950Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="MySql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006bO2RVly1fywxpx0ffqj30r10iq42f.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-MySql数据库操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/07/MySql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time datetime="2018-12-07T10:04:11.000Z" itemprop="datePublished">2018-12-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySql数据库操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySql数据库的基本操作"><a href="#MySql数据库的基本操作" class="headerlink" title="MySql数据库的基本操作"></a>MySql数据库的基本操作</h1><blockquote>
+<p>MySql是关系型数据，关系型数据库是基于关系模型的数据库，而关系模型是通过二维表来保存的，所以它的存储方式就是行列组成的表，每一列是一个字段，每一行是一条记录。<br><br><br>在Python2中连接MySql的库大多是MySQLdb，但是这个库在Python3中不在支持，所以这里我推荐是PyMySQL。相信PyMySQL的安装大家都懂，只需要<code>pip install pymysql</code>下载到本地，然后安装，这里就不详述了。=.=</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="1-数据库的连接等简单操作"><a href="#1-数据库的连接等简单操作" class="headerlink" title="1.数据库的连接等简单操作"></a>1.数据库的连接等简单操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import pymysql</span><br><span class="line"></span><br><span class="line">db &#x3D; pymysql.connect(</span><br><span class="line">    host&#x3D;&#39;localhost&#39;, #本地就是localhost或者127.0.0.1</span><br><span class="line">    user&#x3D;&#39;root&#39;, #你的MySql登录用户名</span><br><span class="line">    password&#x3D;&#39;&#39;, #登录密码</span><br><span class="line">    port&#x3D;3306  #默认端口是3306</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>取数据库的游标</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cursor &#x3D; db.cursor()</span><br><span class="line">cursor.execute(&#39;SELECT VERSION()&#39;) #查看数据库的版本号 注意execute就是执行mysql语句</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>取数据库的版本</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data &#x3D; cursor.fetchone() #fetchone()就是获取第一条数据，也就是上面的那个版本号</span><br><span class="line">print(&#39;Database version:&#39; + data[0])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>建了一个名为spider 的数据库，并且默认编码是utf-8</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor.execute(&#39;CREATE DATABASE spider DEFAULT CHARACTER SET utf8&#39;) #default character set utf8 注意没有&#39;-&#39;哦</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>选中数据库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor.execute(&#39;USE spider&#39;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>建表</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sql &#x3D; &#39;CREATE TABLE IF NOT EXISTS students (id VARCHAR(255) NOT NULL,name VARCHAR(25)NOT NULL,age INT NOT NULL,PRIMARY KEY (id))&#39;</span><br><span class="line">cursor.execute(sql)</span><br></pre></td></tr></table></figure>
+<p>这里就是成功截图</p>
+<p><img src="https://ws1.sinaimg.cn/large/006bO2RVly1fywxpx0ffqj30r10iq42f.jpg" alt="img"></p>
+<p>emmm，我用的是mysql的一个可视化工具<code>navicat</code>,你可以到这来<a href="https://pan.baidu.com/s/13BDqu8idklKPbYO1HPO5TQ" target="_blank" rel="noopener">下载</a> 密码: 5w3y<br>下面就是真正的mysql基本操作了</p>
+<h3 id="2-插入数据"><a href="#2-插入数据" class="headerlink" title="2.插入数据"></a>2.插入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id &#x3D; &#39;2016210405068&#39;</span><br><span class="line">name &#x3D; &#39;言语&#39;</span><br><span class="line">age &#x3D; 18</span><br><span class="line">sql &#x3D; &#39;INSERT INTO students(id,name,age) values(%s,%s,%s)&#39; #sql语句</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>插入数据的标准写法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    cursor.execute(sql, (id, name, age))</span><br><span class="line">    # 需要执行db对象的commit()方法才能实现数据的插入，对于数据的插入、更新、删除操作都需要调用</span><br><span class="line">    print(&#39;Sucessful insert...&#39;)</span><br><span class="line">    db.commit()</span><br><span class="line">except Exception as e:</span><br><span class="line">    print(e)</span><br><span class="line">    # 加了一层异常处理，如果执行失败，则调用rollback()函数来执行数据的回滚，相当于什么都没有发生</span><br><span class="line">    db.rollback()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong> 在很多情况下我们要达到的效果是插入方法无需改动，只需要传入一个字典就行，比如构造这个字典：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data &#x3D; &#123;</span><br><span class="line">    &#39;id&#39;: &#39;2016210405068&#39;,</span><br><span class="line">    &#39;name&#39;: &#39;lightfish&#39;,</span><br><span class="line">    &#39;age&#39;: 22</span><br><span class="line">&#125;</span><br><span class="line">table &#x3D; &#39;students&#39; #数据库表</span><br><span class="line">keys &#x3D; &#39;,&#39;.join(data.keys())  # str类型</span><br><span class="line">values &#x3D; &#39;,&#39;.join([&#39;%s&#39;] * len(data))</span><br><span class="line">sql &#x3D; &#39;INSERT INTO &#123;table&#125;(&#123;key&#125;) VALUES(&#123;values&#125;)&#39;.format(table&#x3D;table, key&#x3D;keys, values&#x3D;values)</span><br><span class="line">try:</span><br><span class="line">    if cursor.execute(sql, tuple(data.values)): #元组类型</span><br><span class="line">        print(&#39;Sucessful insert&#39;)</span><br><span class="line">        db.commit</span><br><span class="line">except Exception as e:</span><br><span class="line">    print(e)</span><br><span class="line">    db.rollback()</span><br></pre></td></tr></table></figure>
+
+<h3 id="更改数据"><a href="#更改数据" class="headerlink" title="更改数据"></a>更改数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sql &#x3D; &#39;UPDATE students SET age&#x3D;%s WHERE name&#x3D;%s&#39;</span><br><span class="line">try:</span><br><span class="line">    cursor.execute(sql, (22, &#39;Bob&#39;))</span><br><span class="line">    db.commit()</span><br><span class="line">except Exception as e:</span><br><span class="line">    print(e)</span><br><span class="line">    db.rollback()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h4 id="注意-下面这个很重要"><a href="#注意-下面这个很重要" class="headerlink" title="注意 下面这个很重要"></a><strong>注意</strong> 下面这个很重要</h4></blockquote>
+<blockquote>
+<p>更新数据的时候，我们关心会不会出现重复的问题。所以我们这里可以再实现一种去重的方法，如果数据存在，则更新数据；否则插入数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">data &#x3D; &#123;</span><br><span class="line">    &#39;id&#39;: &#39;2016210405068&#39;,</span><br><span class="line">    &#39;name&#39;: &#39;辰东&#39;,</span><br><span class="line">    &#39;age&#39;: 33</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">table &#x3D; &#39;students&#39;</span><br><span class="line">keys &#x3D; &#39;,&#39;.join(data.keys())</span><br><span class="line">values &#x3D; &#39;,&#39;.join([&#39;%s&#39;] * len(data))</span><br><span class="line"></span><br><span class="line"># on duplicate key update</span><br><span class="line"></span><br><span class="line">sql &#x3D; &#39;INSERT INTO &#123;table&#125;(&#123;keys&#125;) VALUES (&#123;values&#125;) ON DUPLICATE KEY UPDATE&#39;.format(table&#x3D;table, keys&#x3D;keys,</span><br><span class="line">                                                                                     values&#x3D;values)</span><br><span class="line">update &#x3D; &#39;,&#39;.join([&#39; &#123;key&#125;&#x3D;%s&#39;.format(key&#x3D;key) for key in data.keys()])</span><br><span class="line">sql +&#x3D; update</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    cursor.execute(sql, tuple(data.values()) * 2)</span><br><span class="line">    print(&#39;Sucessfull insert...&#39;)</span><br><span class="line">    db.commit()</span><br><span class="line">except Exception as e:</span><br><span class="line">    print(e)</span><br><span class="line">    db.rollback()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>完整的SQL语句是</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO students(id, name, age) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE id &#x3D; %s, name &#x3D; %s, age &#x3D; %s</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><blockquote>
+<p>删除数据就相对简单了直接用<code>DELETE</code>，但是依然要用<code>commit()</code>函数才能生效</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">table &#x3D; &#39;students&#39;</span><br><span class="line">conditions &#x3D; &#39;age&gt;20&#39;</span><br><span class="line">sql &#x3D; &#39;DELETE FROM &#123;table&#125; WHERE &#123;condition&#125;&#39;.format(table&#x3D;table, condition&#x3D;conditions)</span><br><span class="line">try:</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    print(&#39;Delete sucessfull...&#39;)</span><br><span class="line">    db.commit()</span><br><span class="line">except Exception as e:</span><br><span class="line">    print(e)</span><br><span class="line">    db.rollback()</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h3><blockquote>
+<p><strong>注意</strong><code>fetch</code>方法内部实现有一个偏移，开始的<code>fetchone()</code>就获取了一条数据，所以后面的<code>fetchall()</code>只获取了总数减一条，因此我推荐后面一种方法，用<code>while</code>方法加<code>fetchone()</code>,<code>fetchall()</code>会将结果以元组的形式全部返回，如果数据很大就占用的开销很大。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    print(&#39;Counts: &#39;+cursor.rowcount)</span><br><span class="line">    one &#x3D; cursor.fetchone()</span><br><span class="line">    print(&#39;One: &#39;+one)</span><br><span class="line">    results &#x3D; cursor.fetchall()</span><br><span class="line">    print(&#39;Results: &#39;+results)</span><br><span class="line">    print(&#39;The type of results: &#39;+type(results))</span><br><span class="line">    for row in results:</span><br><span class="line">        print(row)</span><br><span class="line">except Exception as e:</span><br><span class="line">    print(e)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第二种方法</p>
+</blockquote>
+<pre><code>try:
+    cursor.execute(sql)
+    print(&apos;Counts: &apos;+cursor.rowcount)
+    one = cursor.fetchone() #one是一个元组
+    while one:
+        print(&apos;Row: &apos;,one)
+        one = cursor.fetchone()
+except Exception as e:
+    print(e)</code></pre><p><br><br><br><br>以上就是Mysql的基本操作，So<br><br>Just have fun…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/07/MySql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/" data-id="ck7ai0420004i7u0707hh4jzz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/11/rdcloud%E8%AF%8D%E4%BA%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          wordcloud词云
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/07/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MongoDB数据库基本操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/">GearHost</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GearHost/%E5%B9%B2%E8%B4%A7/">干货</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySql/">MySql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/linux/">linux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/termux/">termux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">前后端分离</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B2%E8%B4%A7/">干货</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GearHost/" rel="tag">GearHost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitBook/" rel="tag">GitBook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git%E6%93%8D%E4%BD%9C/" rel="tag">Git操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo%E6%90%AD%E5%BB%BA/" rel="tag">Hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySql/" rel="tag">MySql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nodejs/" rel="tag">Nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%9F%BA%E7%A1%80/" rel="tag">Python基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E6%90%AD%E5%BB%BA/" rel="tag">hexo搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/" rel="tag">spider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/termux/" rel="tag">termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/twilio/" rel="tag">twilio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" rel="tag">前后端分离</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B2%E8%B4%A7/" rel="tag">干货</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Django/" style="font-size: 16.67px;">Django</a> <a href="/tags/GearHost/" style="font-size: 11.67px;">GearHost</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitBook/" style="font-size: 10px;">GitBook</a> <a href="/tags/Git%E6%93%8D%E4%BD%9C/" style="font-size: 11.67px;">Git操作</a> <a href="/tags/Hexo%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">Hexo搭建</a> <a href="/tags/MongoDB/" style="font-size: 11.67px;">MongoDB</a> <a href="/tags/MySql/" style="font-size: 13.33px;">MySql</a> <a href="/tags/Nodejs/" style="font-size: 13.33px;">Nodejs</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">Python基础</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hexo%E6%90%AD%E5%BB%BA/" style="font-size: 15px;">hexo搭建</a> <a href="/tags/linux/" style="font-size: 11.67px;">linux</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/spider/" style="font-size: 11.67px;">spider</a> <a href="/tags/termux/" style="font-size: 11.67px;">termux</a> <a href="/tags/twilio/" style="font-size: 10px;">twilio</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/wordcloud/" style="font-size: 10px;">wordcloud</a> <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" style="font-size: 10px;">前后端分离</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a> <a href="/tags/%E5%B9%B2%E8%B4%A7/" style="font-size: 18.33px;">干货</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 10px;">科学上网</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/13/React-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">React 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/Vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E8%AF%A6%E7%BB%86%E7%AF%87/">Vue 生命周期(详细篇)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/React-%E5%AE%9E%E8%B7%B5%E7%9F%A5%E8%AF%86/">React 实践知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/CSS-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">CSS 基本知识</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/JavaScript-%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">JavaScript 基本知识</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
